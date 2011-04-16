@@ -21,17 +21,22 @@ public class TrafficCamIntent extends Activity {
 		}
 	public class MyOnItemSelectedListener implements OnItemSelectedListener {
 
-	    public void onItemSelected(AdapterView parent,
+	    public void onItemSelected(AdapterView<?> parent,
 	        View view, int pos, long id) {
-	    	String selectedCamera = R.array.cameras_array[pos];
+	    	String selectedCamera = <String>R.array.cameras_array[pos];
 	        	Intent intent = new Intent(TrafficCamIntent.this, DisplayTrafficCam.class);
 	        	intent.putExtra(selectedCamera);
 	        	startActivity(intent);
 	        }
+
+
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+			
+		}
 	    }
 
-	    public void onNothingSelected(AdapterView parent) {
-	      // Do nothing.
-	    }
 	}
 }
