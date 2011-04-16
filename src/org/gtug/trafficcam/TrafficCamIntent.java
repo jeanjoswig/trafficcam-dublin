@@ -13,7 +13,7 @@ public class TrafficCamIntent extends Activity {
 		setContentView(R.layout.main);
 		Spinner s = (Spinner) findViewById(R.id.Spinner01);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		R.array.cameras_array, R.layout.mySpinnerItem);
+		R.array.cameras_array, R.layout.myspinneritem);
 		s.setAdapter(adapter);
 		}
 }
