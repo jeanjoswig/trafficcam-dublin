@@ -13,6 +13,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisplayTrafficCam"
+        	android:label="@string/display_trafficcam_title">
+        </activity>
 
     </application>
 </manifest>
