@@ -1,5 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, TrafficCamIntent!</string>
-    <string name="app_name">Dublin Traffic Cams</string>
+	<string name="app_name">Dublin Traffic Cams</string>
+	<string name="camera_prompt">Choose a camera</string>
+	<string-array name="cameras_array">
+		<item>M1-Balbriggan</item>
+		<item>M50-Ballinteer</item>
+		<item>M50-Edmondstown</item>
+		<item>M50-Firhouse</item>
+		<item>M50-Tallaght</item>
+		<item>M50-Greenhills Park</item>
+		<item>M50-Ballymount</item>
+		<item>M50-Red Cow</item>
+		<item>M50-Red Cow Slip</item>
+		<item>Naas road-Newlands cross</item>
+		<item>M50-Lucan</item>
+		<item>M50-Blanchardstown Roundabout</item>
+		<item>M50-South of Finglas Roundabout</item>
+		<item>M50-Ballymun</item>
+		<item>M1-Port Tunnel Works</item>
+		<item>M1-M50</item>
+		<item>N32-Malahide Road</item>
+		<item>M1-Airport</item>
+		<item>M1-Drynam</item>
+		<item>M1-Malahide Estuary</item>
+		<item>M1-Lissenhall</item>
+		<item>Dame Street from Civic Offices</item>
+		<item>John\'s Road-SCR</item>
+		<item>John\'s Road West</item>
+		<item>Pearse Street</item>
+		<item>Samuel Beckett Bridge</item>
+		<item>Sir John Rogersons Quay</item>
+		<item>Harolds Cross Bridge</item>
+		<item>Longmile Road</item>
+		<item>N11-Fosters</item>
+		<item>N11-Mont Merrion</item>
+		<item>N11-Trees Road</item>
+		<item>N11-Kilmacud Rd</item>
+		<item>N11-Newtownpark Avenue</item>
+		<item>N11-Kill Lane</item>
+		<item>N11-Clonkeen</item>
+		<item>N11-Johnstown</item>
+		<item>N11-Wyattville</item>
+		<item>Cabra Road</item>
+		<item>The Quays from Liberty Hall</item>
+		<item>North Quays from Civic Offices</item>
+		<item>O\'Connell Bridge</item>
+		<item>North Wall Quay</item>
+		<item>Dublin Port Tunnel Toll Plaza</item>
+		<item>Guild Street-Mayor Street</item>
+		<item>Guild Street-Seville Place</item>
+		<item>Drumcondra Road</item>
+		<item>North Strand Road</item>
+		<item>Constitution Hill</item>
+	</string-array>
 </resources>
