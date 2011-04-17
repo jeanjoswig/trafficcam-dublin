@@ -16,6 +16,6 @@
 		android:maxHeight="288px" android:maxWidth="384px" android:minHeight="288px"
 		android:minWidth="384px" android:layout_width="wrap_content"
 		android:baselineAlignBottom="false" android:layout_gravity="center"
-		android:id="@+id/placeholder" android:src="@drawable/placeholder"></ImageView>
+		android:id="@+id/imageholder" android:src="@drawable/imageholder"></ImageView>
 
 </LinearLayout>
