@@ -3,3 +3,4 @@
 *.ap_
 *.dex
 gen/org/gtug/trafficcam/R.java
+res/layout/mySpinnerItem.xml
