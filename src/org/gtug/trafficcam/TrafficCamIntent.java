@@ -6,8 +6,8 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -38,7 +38,8 @@ public class TrafficCamIntent extends Activity {
 	    //String[] cameras_array = res.getStringArray(R.array.cameras_array);
 	    
 	    Spinner s = (Spinner) findViewById(R.id.Spinner01);
-	    
+	    MyOnItemSelectedListener l = new MyOnItemSelectedListener(); 
+	    s.setOnItemSelectedListener(l);
 	    
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 	            this, R.array.cameras_array,  android.R.layout.simple_spinner_item);
@@ -57,21 +58,21 @@ public class TrafficCamIntent extends Activity {
 
 	    	String selectedCamera = camera_filenames[pos];
 	        	pics = (new FetchPicture()).fetch_pics(selectedCamera, 1);
-	            public View getView(int position, View convertView, ViewGroup parentViewGroup) 
-	            {
-	                ImageView imageView = new ImageView(context);
-	                imageView.setImageResource(imageIDs[position]);
-	                return imageView;
-	            }
-	        }
-
-
+	        	ImageView iv = (ImageView) findViewById(R.id.imageholder);
+	        	iv.setImageDrawable(pics.get(0));
+	        	setContentView(R.id.imageholder);
+	        	
+//	             private void startGame(int i) {
+//	             	Log.d(TAG, "clicked on" + i);
+//	             	Intent intent = new Intent(Sudoku.this, Game.class);
+//	             	intent.putExtra(Game.KEY_DIFFICULTY, i);
+//	             	startActivity(intent);
+	             }
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
 			// TODO Auto-generated method stub
 			
 		}
-	    }
-
 	}
+}
