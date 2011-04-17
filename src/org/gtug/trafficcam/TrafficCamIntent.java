@@ -31,22 +31,13 @@ public class TrafficCamIntent extends Activity {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
 	    Resources res = getResources();
-	    String[] cameras_array = res.getStringArray(R.array.cameras_array);
-	    String[] locations_array = null, names_array = null, temp_array;
-	    temp_array = null;
-	    String delimiter = "@";
-	    for (int i = 0; i != cameras_array.length; i++)
-	    	{
-	    	temp_array = cameras_array[i].split(delimiter);
-	    	locations_array[i] = temp_array[0];
-	    	names_array[i] = temp_array[1];
-	    	}
+	    //String[] cameras_array = res.getStringArray(R.array.cameras_array);
 	    
 	    Spinner s = (Spinner) findViewById(R.id.Spinner01);
 	    
 	    
-	    ArrayAdapter<CharSequence> adapter = new ArrayAdapter(
-	            this,  android.R.layout.simple_spinner_item, locations_array);
+	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+	            this, R.array.cameras_array,  android.R.layout.simple_spinner_item);
 	    adapter.setDropDownViewResource(R.layout.myspinneritem);
 	    s.setAdapter(adapter);
 	}
@@ -59,7 +50,7 @@ public class TrafficCamIntent extends Activity {
 	    	Resources res = getResources();
 	    	String[] cameras_array = res.getStringArray(R.array.cameras_array);
 
-	    	String selectedCamera = cameras_array[pos];
+	    	String selectedCamera = camera_filenames[pos];
 	        	Intent intent = new Intent(TrafficCamIntent.this, DisplayTrafficCam.class);
 	        	intent.putExtra(selectedCamera, boolFlag);
 	        	startActivity(intent);
