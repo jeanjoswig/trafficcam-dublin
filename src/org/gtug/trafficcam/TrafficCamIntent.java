@@ -60,7 +60,7 @@ public class TrafficCamIntent extends Activity {
 	        	pics = (new FetchPicture()).fetch_pics(selectedCamera, 1);
 	        	ImageView iv = (ImageView) findViewById(R.id.imageholder);
 	        	iv.setImageDrawable(pics.get(0));
-	        	setContentView(R.id.imageholder);
+	        	//setContentView(R.id.imageholder);
 	        	
 //	             private void startGame(int i) {
 //	             	Log.d(TAG, "clicked on" + i);
