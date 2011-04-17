@@ -28,10 +28,18 @@ public class TrafficCamIntent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
-
+	    Resources res = getResources();
+	    String[] cameras_array = res.getStringArray(R.array.cameras_array);
+	    String[] locations_array, names_array, temp_array;
+	    String delimiter = "|";
+	    for (int i = 0; i<cameras_array.length; i++)
+	    	{
+	    	temp_array = cameras_array[i].split(delimiter);
+	    	}
+	    
 	    Spinner s = (Spinner) findViewById(R.id.Spinner01);
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-	            this, R.array.cameras_array, android.R.layout.simple_spinner_item);
+	            this, &temp_array, android.R.layout.simple_spinner_item);
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    s.setAdapter(adapter);
 	}
