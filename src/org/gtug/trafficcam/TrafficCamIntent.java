@@ -48,12 +48,14 @@ public class TrafficCamIntent extends Activity {
 	        View view, int pos, long id) {
 	    	Boolean boolFlag = false;
 	    	Resources res = getResources();
+	    	ArrayList<Drawable> pics = new ArrayList();
 	    	String[] cameras_array = res.getStringArray(R.array.cameras_array);
 
 	    	String selectedCamera = camera_filenames[pos];
 	        	Intent intent = new Intent(TrafficCamIntent.this, DisplayTrafficCam.class);
 	        	intent.putExtra(selectedCamera, boolFlag);
 	        	startActivity(intent);
+	        	pics = (new FetchPicture()).fetch_pics(selectedCamera, 1);
 	        }
 
 
