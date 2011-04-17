@@ -2,4 +2,4 @@
 *.apk
 *.ap_
 *.dex
-gen*
+gen/org/gtug/trafficcam/R.java
