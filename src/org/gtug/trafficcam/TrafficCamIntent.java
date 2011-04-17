@@ -12,6 +12,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 
 
+
+
 public class TrafficCamIntent extends Activity {
     /** Called when the activity is first created. */
 /*	@Override
@@ -31,6 +33,7 @@ public class TrafficCamIntent extends Activity {
 	    Resources res = getResources();
 	    String[] cameras_array = res.getStringArray(R.array.cameras_array);
 	    String[] locations_array, names_array, temp_array;
+	    temp_array = null;
 	    String delimiter = "|";
 	    for (int i = 0; i<cameras_array.length; i++)
 	    	{
@@ -38,9 +41,11 @@ public class TrafficCamIntent extends Activity {
 	    	}
 	    
 	    Spinner s = (Spinner) findViewById(R.id.Spinner01);
-	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-	            this, &temp_array, android.R.layout.simple_spinner_item);
-	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    
+	    
+	    ArrayAdapter adapter = new ArrayAdapter(
+	            this,  android.R.layout.simple_spinner_item, temp_array);
+	    adapter.setDropDownViewResource(R.layout.myspinneritem);
 	    s.setAdapter(adapter);
 	}
 
