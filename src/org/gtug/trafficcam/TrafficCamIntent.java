@@ -3,13 +3,14 @@ package org.gtug.trafficcam;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -41,7 +42,7 @@ public class TrafficCamIntent extends Activity {
 	    
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 	            this, R.array.cameras_array,  android.R.layout.simple_spinner_item);
-	    adapter.setDropDownViewResource(R.layout.myspinneritem);
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 	    s.setAdapter(adapter);
 	}
 
@@ -55,10 +56,13 @@ public class TrafficCamIntent extends Activity {
 	    	String[] camera_filenames = res.getStringArray(R.array.camera_filenames);
 
 	    	String selectedCamera = camera_filenames[pos];
-	        	Intent intent = new Intent(TrafficCamIntent.this, DisplayTrafficCam.class);
-	        	intent.putExtra(selectedCamera, boolFlag);
-	        	startActivity(intent);
 	        	pics = (new FetchPicture()).fetch_pics(selectedCamera, 1);
+	            public View getView(int position, View convertView, ViewGroup parentViewGroup) 
+	            {
+	                ImageView imageView = new ImageView(context);
+	                imageView.setImageResource(imageIDs[position]);
+	                return imageView;
+	            }
 	        }
 
 
