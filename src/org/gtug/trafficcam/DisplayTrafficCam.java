@@ -2,15 +2,14 @@ package org.gtug.trafficcam;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 public class DisplayTrafficCam extends Activity {
 
-	@override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		String selectedCamera;
+		String selectedCamera = null;
 		getIntent().getStringExtra(selectedCamera);
 		
 	}
