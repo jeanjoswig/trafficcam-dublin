@@ -32,19 +32,21 @@ public class TrafficCamIntent extends Activity {
 	    setContentView(R.layout.main);
 	    Resources res = getResources();
 	    String[] cameras_array = res.getStringArray(R.array.cameras_array);
-	    String[] locations_array, names_array, temp_array;
+	    String[] locations_array = null, names_array = null, temp_array;
 	    temp_array = null;
-	    String delimiter = "|";
-	    for (int i = 0; i<cameras_array.length; i++)
+	    String delimiter = "@";
+	    for (int i = 0; i != cameras_array.length; i++)
 	    	{
 	    	temp_array = cameras_array[i].split(delimiter);
+	    	locations_array[i] = temp_array[0];
+	    	names_array[i] = temp_array[1];
 	    	}
 	    
 	    Spinner s = (Spinner) findViewById(R.id.Spinner01);
 	    
 	    
-	    ArrayAdapter adapter = new ArrayAdapter(
-	            this,  android.R.layout.simple_spinner_item, temp_array);
+	    ArrayAdapter<CharSequence> adapter = new ArrayAdapter(
+	            this,  android.R.layout.simple_spinner_item, locations_array);
 	    adapter.setDropDownViewResource(R.layout.myspinneritem);
 	    s.setAdapter(adapter);
 	}

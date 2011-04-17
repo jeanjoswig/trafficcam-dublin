@@ -2,5 +2,5 @@
 *.apk
 *.ap_
 *.dex
-gen/org/gtug/trafficcam/R.java
+gen/
 res/layout/mySpinnerItem.xml

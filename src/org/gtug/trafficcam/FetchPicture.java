@@ -17,7 +17,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.graphics.drawable.Drawable;
-import android.webkit.WebView;
+
 
 /**
  * @author joswigjn

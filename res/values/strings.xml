@@ -4,54 +4,54 @@
 	<string name="display_trafficcam_title">Placeholder</string>
 	<string name="camera_prompt">Choose a camera</string>
 	<string-array name="cameras_array">
-		<item>M1-Balbriggan|Site0Camera109.jpg</item>
-		<item>M50-Ballinteer|Site0Camera73.jpg</item>
-		<item>M50-Edmondstown|Site0Camera74.jpg</item>
-		<item>M50-Firhouse|Site0Camera75.jpg</item>
-		<item>M50-Tallaght|Site0Camera77.jpg</item>
-		<item>M50-Greenhills Park|Site0Camera81.jpg</item>
-		<item>M50-Ballymount|Site0Camera78.jpg</item>
-		<item>M50-Red Cow|Site0Camera79.jpg</item>
-		<item>M50-Red Cow Slip|Site0Camera80.jpg</item>
-		<item>Naas road-Newlands cross|Site0Camera85.jpg</item>
-		<item>M50-Lucan|Site0Camera82.jpg</item>
-		<item>M50-Blanchardstown Roundabout|Site0Camera71.jpg</item>
-		<item>M50-South of Finglas Roundabout|Site0Camera87.jpg</item>
-		<item>M50-Ballymun|Site0Camera96.jpg</item>
-		<item>M1-Port Tunnel Works|Site0Camera95.jpg</item>
-		<item>M1-M50|Site0Camera94.jpg</item>
-		<item>N32-Malahide Road|Site0Camera91.jpg</item>
-		<item>M1-Airport|Site0Camera110.jpg</item>
-		<item>M1-Drynam|Site0Camera111.jpg</item>
-		<item>M1-Malahide Estuary|Site0Camera112.jpg</item>
-		<item>M1-Lissenhall|Site0Camera113.jpg</item>
-		<item>Dame Street from Civic Offices|Site0Camera21.jpg</item>
-		<item>John\'s Road-SCR|Site0Camera15.jpg</item>
-		<item>John\'s Road West|Site0Camera163.jpg</item>
-		<item>Pearse Street|Site0Camera23.jpg</item>
-		<item>Samuel Beckett Bridge|Site0Camera136.jpg</item>
-		<item>Sir John Rogersons Quay|Site0Camera137.jpg</item>
-		<item>Harolds Cross Bridge|Site0Camera31.jpg</item>
-		<item>Longmile Road|Site0Camera66.jpg</item>
-		<item>N11-Fosters|Site0Camera100.jpg</item>
-		<item>N11-Mont Merrion|Site0Camera101.jpg</item>
-		<item>N11-Trees Road|Site0Camera103.jpg</item>
-		<item>N11-Kilmacud Rd|Site0Camera102.jpg</item>
-		<item>N11-Newtownpark Avenue|Site0Camera104.jpg</item>
-		<item>N11-Kill Lane|Site0Camera105.jpg</item>
-		<item>N11-Clonkeen|Site0Camera106.jpg</item>
-		<item>N11-Johnstown|Site0Camera107.jpg</item>
-		<item>N11-Wyattville|Site0Camera108.jpg</item>
-		<item>Cabra Road|Site0Camera32.jpg</item>
-		<item>The Quays from Liberty Hall|Site0Camera10.jpg</item>
-		<item>North Quays from Civic Offices|Site0Camera22.jpg</item>
-		<item>O\'Connell Bridge|Site0Camera6.jpg</item>
-		<item>North Wall Quay|Site0Camera122.jpg</item>
-		<item>Dublin Port Tunnel Toll Plaza|Site0Camera135.jpg</item>
-		<item>Guild Street-Mayor Street|Site0Camera127.jpg</item>
-		<item>Guild Street-Seville Place|Site0Camera139.jpg</item>
-		<item>Drumcondra Road|Site0Camera27.jpg</item>
-		<item>North Strand Road|Site0Camera24.jpg</item>
-		<item>Constitution Hill|Site0Camera131.jpg</item>
+		<item>M1-Balbriggan@Site0Camera109.jpg</item>
+		<item>M50-Ballinteer@Site0Camera73.jpg</item>
+		<item>M50-Edmondstown@Site0Camera74.jpg</item>
+		<item>M50-Firhouse@Site0Camera75.jpg</item>
+		<item>M50-Tallaght@Site0Camera77.jpg</item>
+		<item>M50-Greenhills Park@Site0Camera81.jpg</item>
+		<item>M50-Ballymount@Site0Camera78.jpg</item>
+		<item>M50-Red Cow@Site0Camera79.jpg</item>
+		<item>M50-Red Cow Slip@Site0Camera80.jpg</item>
+		<item>Naas road-Newlands cross@Site0Camera85.jpg</item>
+		<item>M50-Lucan@Site0Camera82.jpg</item>
+		<item>M50-Blanchardstown Roundabout@Site0Camera71.jpg</item>
+		<item>M50-South of Finglas Roundabout@Site0Camera87.jpg</item>
+		<item>M50-Ballymun@Site0Camera96.jpg</item>
+		<item>M1-Port Tunnel Works@Site0Camera95.jpg</item>
+		<item>M1-M50@Site0Camera94.jpg</item>
+		<item>N32-Malahide Road@Site0Camera91.jpg</item>
+		<item>M1-Airport@Site0Camera110.jpg</item>
+		<item>M1-Drynam@Site0Camera111.jpg</item>
+		<item>M1-Malahide Estuary@Site0Camera112.jpg</item>
+		<item>M1-Lissenhall@Site0Camera113.jpg</item>
+		<item>Dame Street from Civic Offices@Site0Camera21.jpg</item>
+		<item>John\'s Road-SCR@Site0Camera15.jpg</item>
+		<item>John\'s Road West@Site0Camera163.jpg</item>
+		<item>Pearse Street@Site0Camera23.jpg</item>
+		<item>Samuel Beckett Bridge@Site0Camera136.jpg</item>
+		<item>Sir John Rogersons Quay@Site0Camera137.jpg</item>
+		<item>Harolds Cross Bridge@Site0Camera31.jpg</item>
+		<item>Longmile Road@Site0Camera66.jpg</item>
+		<item>N11-Fosters@Site0Camera100.jpg</item>
+		<item>N11-Mont Merrion@Site0Camera101.jpg</item>
+		<item>N11-Trees Road@Site0Camera103.jpg</item>
+		<item>N11-Kilmacud Rd@Site0Camera102.jpg</item>
+		<item>N11-Newtownpark Avenue@Site0Camera104.jpg</item>
+		<item>N11-Kill Lane@Site0Camera105.jpg</item>
+		<item>N11-Clonkeen@Site0Camera106.jpg</item>
+		<item>N11-Johnstown@Site0Camera107.jpg</item>
+		<item>N11-Wyattville@Site0Camera108.jpg</item>
+		<item>Cabra Road@Site0Camera32.jpg</item>
+		<item>The Quays from Liberty Hall@Site0Camera10.jpg</item>
+		<item>North Quays from Civic Offices@Site0Camera22.jpg</item>
+		<item>O\'Connell Bridge@Site0Camera6.jpg</item>
+		<item>North Wall Quay@Site0Camera122.jpg</item>
+		<item>Dublin Port Tunnel Toll Plaza@Site0Camera135.jpg</item>
+		<item>Guild Street-Mayor Street@Site0Camera127.jpg</item>
+		<item>Guild Street-Seville Place@Site0Camera139.jpg</item>
+		<item>Drumcondra Road@Site0Camera27.jpg</item>
+		<item>North Strand Road@Site0Camera24.jpg</item>
+		<item>Constitution Hill@Site0Camera131.jpg</item>
 	</string-array>
 </resources>
