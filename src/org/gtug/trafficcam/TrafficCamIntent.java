@@ -1,6 +1,7 @@
 package org.gtug.trafficcam;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +24,7 @@ public class TrafficCamIntent extends Activity {
 
 	    public void onItemSelected(AdapterView<?> parent,
 	        View view, int pos, long id) {
-	    	String selectedCamera = <String>R.array.cameras_array[pos];
+	    	String selectedCamera = R.array.cameras_array[pos];
 	        	Intent intent = new Intent(TrafficCamIntent.this, DisplayTrafficCam.class);
 	        	intent.putExtra(selectedCamera);
 	        	startActivity(intent);
