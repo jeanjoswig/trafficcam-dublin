@@ -1,8 +1,11 @@
 package org.gtug.trafficcam;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,7 +52,7 @@ public class TrafficCamIntent extends Activity {
 	    	Boolean boolFlag = false;
 	    	Resources res = getResources();
 	    	ArrayList<Drawable> pics = new ArrayList();
-	    	String[] cameras_array = res.getStringArray(R.array.cameras_array);
+	    	String[] camera_filenames = res.getStringArray(R.array.camera_filenames);
 
 	    	String selectedCamera = camera_filenames[pos];
 	        	Intent intent = new Intent(TrafficCamIntent.this, DisplayTrafficCam.class);

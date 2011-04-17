@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
  * @author joswigjn
  * 
  * Utility class to retrieve traffic pictures.
- *
+ * 
  */
 public class FetchPicture {	
 	private HttpClient client;
