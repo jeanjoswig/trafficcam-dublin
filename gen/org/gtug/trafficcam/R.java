@@ -9,6 +9,7 @@ package org.gtug.trafficcam;
 
 public final class R {
     public static final class array {
+        public static final int camera_filenames=0x7f050001;
         public static final int cameras_array=0x7f050000;
     }
     public static final class attr {
@@ -28,7 +29,6 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
-        public static final int camera_prompt=0x7f040002;
-        public static final int display_trafficcam_title=0x7f040001;
+        public static final int camera_prompt=0x7f040001;
     }
 }
