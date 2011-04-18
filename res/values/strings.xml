@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Dublin Traffic Cams</string>
-	<string name="display_trafficcam_title">Placeholder</string>
 	<string name="camera_prompt">Choose a camera</string>
 	<string-array name="cameras_array">
 		<item>M1-Balbriggan</item>

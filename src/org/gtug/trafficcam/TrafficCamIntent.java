@@ -6,17 +6,12 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
-
-
-
-
 
 public class TrafficCamIntent extends Activity {
     /** Called when the activity is first created. */
@@ -35,31 +30,23 @@ public class TrafficCamIntent extends Activity {
 	    s.setAdapter(adapter);
 	}
 
-	public class MyOnItemSelectedListener implements OnItemSelectedListener {
-
-	    public void onItemSelected(AdapterView<?> parent,
-	        View view, int pos, long id) {
-	    	Resources res = getResources();
-	    	ArrayList<Drawable> pics = new ArrayList();
-	    	String[] camera_filenames = res.getStringArray(R.array.camera_filenames);
-
-	    	String selectedCamera = camera_filenames[pos];
-	        	pics = (new FetchPicture()).fetch_pics(selectedCamera, 1);
-	        	ImageView iv = (ImageView) findViewById(R.id.imageholder);
-	        	iv.setImageDrawable(pics.get(0));
-	        	//setContentView(R.id.imageholder);
-	        	
-//	             private void startGame(int i) {
-//	             	Log.d(TAG, "clicked on" + i);
-//	             	Intent intent = new Intent(Sudoku.this, Game.class);
-//	             	intent.putExtra(Game.KEY_DIFFICULTY, i);
-//	             	startActivity(intent);
+	public class MyOnItemSelectedListener implements OnItemSelectedListener
+	{
+	    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) 
+	    		{
+	    		Resources res = getResources();
+	    		ArrayList<Drawable> pics = new ArrayList();
+	    		String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
+	    		String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
+	    		pics = (new FetchPicture()).fetch_pics(selectedCamera, 1); /*use FetchPicture to get the image for that camera*/
+	    		ImageView iv = (ImageView) findViewById(R.id.imageholder); 
+	    		iv.setImageDrawable(pics.get(0));/*load downloaded image into the imageholder*/
 	             }
 
 		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
-			
+		public void onNothingSelected(AdapterView<?> arg0)
+		{
+			// TODO Auto-generated method stub		
 		}
 	}
 }
