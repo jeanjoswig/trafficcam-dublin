@@ -1,8 +1,11 @@
 package org.gtug.trafficcam;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.FloatMath;
 import android.util.Log;
@@ -14,10 +17,13 @@ import android.widget.ImageView;
 public class TouchPictureView extends Activity implements OnTouchListener {
 	   private static final String TAG = "TouchPictureView";
 
-
+	   Bundle b=this.getIntent().getExtras();
+	   String selectedCamera=b.getString("selectedCamera");
+	   
 	   // These matrices will be used to move and zoom image
 	   Matrix matrix = new Matrix();
 	   Matrix savedMatrix = new Matrix();
+
 
 	   // We can be in one of these 3 states
 	   static final int NONE = 0;
@@ -43,7 +49,11 @@ public class TouchPictureView extends Activity implements OnTouchListener {
 	    	  iv.setOnLongClickListener(new View.OnLongClickListener()
 	      }*/
 	      setContentView(R.layout.viewimage);
+	      
+  		  ArrayList<Drawable> pics = new ArrayList();
+	      pics = (new FetchPicture()).fetch_pics(selectedCamera, 1); /*use FetchPicture to get the image for that camera*/
 	      ImageView view = (ImageView) findViewById(R.id.imageholder);
+	      view.setImageDrawable(pics.get(0));
 	      view.setOnTouchListener(this);
 	   }
 

@@ -58,10 +58,8 @@ public class TrafficCamIntent extends Activity {
 	    		iv.setImageDrawable(pics.get(0));/*load downloaded image into the imageholder*/
 	    		final Bundle b=new Bundle();
 				b.putString("selectedCamera", selectedCamera);
-
 	    		iv.setOnLongClickListener(new View.OnLongClickListener() 
 	    			{
-
 	    			  @Override
 	    			  public boolean onLongClick(View view)
 	    			  		{
