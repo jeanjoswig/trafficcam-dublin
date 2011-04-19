@@ -50,7 +50,7 @@ public class TrafficCamIntent extends Activity {
 	    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) 
 	    		{
 	    		Resources res = getResources();
-	    		ArrayList<Drawable> pics = new ArrayList();
+	    		ArrayList<Drawable> pics = new ArrayList<Drawable>();
 	    		String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
 	    		final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
 	    		pics = (new FetchPicture()).fetch_pics(selectedCamera, 1); /*use FetchPicture to get the image for that camera*/

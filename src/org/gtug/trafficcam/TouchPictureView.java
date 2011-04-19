@@ -17,12 +17,14 @@ import android.widget.ImageView;
 public class TouchPictureView extends Activity implements OnTouchListener {
 	   private static final String TAG = "TouchPictureView";
 
-	   Bundle b=this.getIntent().getExtras();
-	   String selectedCamera=b.getString("selectedCamera");
-	   
+
 	   // These matrices will be used to move and zoom image
 	   Matrix matrix = new Matrix();
 	   Matrix savedMatrix = new Matrix();
+	   
+
+	   
+
 
 
 	   // We can be in one of these 3 states
@@ -39,18 +41,9 @@ public class TouchPictureView extends Activity implements OnTouchListener {
 	   @Override
 	   public void onCreate(Bundle savedInstanceState) {
 	      super.onCreate(savedInstanceState);
-/*	      Bundle extras = getIntent().getExtras();
-	      if (extras != null)
-	      {
-	    	  
-	    	  pics = (new FetchPicture()).fetch_pics(extras.getString(R.attr.class.), 1); //use FetchPicture to get the image for that camera
-	    	  ImageView iv = (ImageView) findViewById(R.id.imageholder); 
-	    	  iv.setImageDrawable(pics.get(0));//load downloaded image into the imageholder
-	    	  iv.setOnLongClickListener(new View.OnLongClickListener()
-	      }*/
 	      setContentView(R.layout.viewimage);
-	      
-  		  ArrayList<Drawable> pics = new ArrayList();
+		   String selectedCamera = this.getIntent().getExtras().getString("selectedCamera");
+  		  ArrayList<Drawable> pics = new ArrayList<Drawable>();
 	      pics = (new FetchPicture()).fetch_pics(selectedCamera, 1); /*use FetchPicture to get the image for that camera*/
 	      ImageView view = (ImageView) findViewById(R.id.imageholder);
 	      view.setImageDrawable(pics.get(0));
