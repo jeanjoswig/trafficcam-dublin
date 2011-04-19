@@ -20,7 +20,6 @@ public class TrafficCamIntent extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.main);
-	    
 	    Spinner s = (Spinner) findViewById(R.id.Spinner01);
 	    MyOnItemSelectedListener l = new MyOnItemSelectedListener(); 
 	    s.setOnItemSelectedListener(l);
@@ -29,19 +28,6 @@ public class TrafficCamIntent extends Activity {
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 	    s.setAdapter(adapter);
 	}
-	/*private OnLongClickListener lTouchPictureView = new OnLongClickListener() 
-	{
-    public boolean onLongClick(View v) 
-    	{
-    	 Intent intent = new Intent(TrafficCamIntent.this, TouchPictureView.class);
-    	 startActivity(intent);
-    	return true;
-    	}
-	};
-	Button button = (Button)findViewById(R.id.imageholder);
-	button.setOnLongClickListener(lTouchPictureView);*/
-	
-
 	
 	public class MyOnItemSelectedListener implements OnItemSelectedListener
 	{
@@ -62,10 +48,6 @@ public class TrafficCamIntent extends Activity {
 	    			  public boolean onLongClick(View view)
 	    			  		{
 	    				   Intent intent = new Intent(TrafficCamIntent.this, TouchPictureView.class);
-	    				   /*String FILENAME = "hello_file";
-	    				   FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-	    				   fos.(pics.get(0));
-	    				   fos.close();*/
 	    				   intent.putExtras(b);
 	    				   startActivity(intent);
 	    				   return true;
