@@ -59,7 +59,7 @@ public class FetchPicture {
 			for (int i=0; i < num; i++) {
 				URL im = new URL(base_address + dirs.get(i) + cam);
 				InputStream is = (InputStream)im.getContent();
-				pics.add(Drawable.createFromStream(is, cam));				
+				pics.add(Drawable.createFromStream(is, cam));
 								
 			}
 		} catch (Throwable t) {
