@@ -56,6 +56,9 @@ public class TrafficCamIntent extends Activity {
 	    		pics = (new FetchPicture()).fetch_pics(selectedCamera, 1); /*use FetchPicture to get the image for that camera*/
 	    		ImageView iv = (ImageView) findViewById(R.id.imageholder); 
 	    		iv.setImageDrawable(pics.get(0));/*load downloaded image into the imageholder*/
+	    		final Bundle b=new Bundle();
+				b.putString("selectedCamera", selectedCamera);
+
 	    		iv.setOnLongClickListener(new View.OnLongClickListener() 
 	    			{
 
@@ -67,6 +70,7 @@ public class TrafficCamIntent extends Activity {
 	    				   FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
 	    				   fos.(pics.get(0));
 	    				   fos.close();*/
+	    				   intent.putExtras(b);
 	    				   startActivity(intent);
 	    				   return true;
 	    				    }
