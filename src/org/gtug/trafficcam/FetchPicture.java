@@ -25,10 +25,11 @@ import android.graphics.drawable.Drawable;
  * Utility class to retrieve traffic pictures.
  * 
  */
+
 public class FetchPicture {	
 	private HttpClient client;
-	private ArrayList<String> dirs = new ArrayList();
-	private ArrayList<Drawable> pics = new ArrayList();		
+	private ArrayList<String> dirs = new ArrayList<String>();
+	private ArrayList<Drawable> pics = new ArrayList<Drawable>();		
 	private String base_address = "http://traffic.savina.net/webcam/";
 	
 	FetchPicture() {
@@ -79,7 +80,7 @@ public class FetchPicture {
 	 * @return ArrayList<String> with sorted directory names
 	 */
 	ArrayList<String> parse_dirs(String body) {
-		ArrayList<String> st = new ArrayList(); 
+		ArrayList<String> st = new ArrayList<String>(); 
 		Pattern p = Pattern.compile("[0-9]+/");
 		Matcher m = p.matcher(body);		
 		while(m.find()) {
