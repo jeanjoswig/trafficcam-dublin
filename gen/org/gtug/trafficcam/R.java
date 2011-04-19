@@ -26,9 +26,11 @@ public final class R {
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int myspinneritem=0x7f030001;
+        public static final int viewimage=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
         public static final int camera_prompt=0x7f040001;
+        public static final int longpress_hint=0x7f040002;
     }
 }
