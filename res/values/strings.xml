@@ -2,7 +2,7 @@
 <resources>
 	<string name="app_name">Dublin Traffic Cams</string>
 	<string name="camera_prompt">Choose a camera</string>
-	<string name="longpress_hint">Longpress a picture to get a better look at it.</string>
+	<string name="longpress_hint">Long-press a picture to get a better look at it.</string>
 	<string-array name="cameras_array">
 		<item>M1-Balbriggan</item>
 		<item>M50-Ballinteer</item>

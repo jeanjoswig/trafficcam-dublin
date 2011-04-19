@@ -1,11 +1,11 @@
-<FrameLayout
-   xmlns:android="http://schemas.android.com/apk/res/android"
-   android:layout_width="fill_parent"
-   android:layout_height="fill_parent">
-   <ImageView android:id="@+id/imageholder"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:src="@drawable/imageholder"
-      android:scaleType="matrix">
-   </ImageView>
-</FrameLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<ImageView android:focusableInTouchMode="true"
+		android:src="@drawable/imageholder" android:id="@+id/imageholder"
+		android:adjustViewBounds="true" android:gravity="center_vertical"
+		android:scaleType="matrix" android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:layout_x="0dp"
+		android:layout_y="0dp"></ImageView>
+</LinearLayout>
