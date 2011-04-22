@@ -7,9 +7,5 @@
 		android:id="@+id/imageholder"
 		android:adjustViewBounds="true"
 		android:gravity="center_vertical"
-		android:scaleType="matrix"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_x="0dp"
-		android:layout_y="0dp"></ImageView>
+		android:scaleType="matrix"></ImageView>
 </LinearLayout>
