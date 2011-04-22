@@ -20,9 +20,10 @@
 		-->
 	<Gallery 
 		android:id="@+id/gallery"
-		android:maxHeight="288px" android:maxWidth="384px" android:minHeight="288px"
-		android:minWidth="384px" android:layout_width="wrap_content"
-		android:baselineAlignBottom="false" android:layout_gravity="center"/>
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:baselineAlignBottom="false"
+		android:layout_gravity="center"/>
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:layout_marginTop="10dip"
