@@ -1,13 +1,15 @@
 package org.gtug.trafficcam;
 
 import java.util.ArrayList;
-import java.lang.*;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,10 +18,13 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 public class TrafficCamIntent extends Activity 
 {
+	ArrayList<Drawable> pics = new ArrayList<Drawable>();
     /** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -37,11 +42,12 @@ public class TrafficCamIntent extends Activity
 
 	public class MyOnItemSelectedListener implements OnItemSelectedListener
 		{
+		ArrayList<Drawable> pics = new ArrayList<Drawable>();
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id)
 			{
 				Context c = getBaseContext();
 				Resources res = getResources();
-				ArrayList<Drawable> pics = new ArrayList<Drawable>();
+				
 				String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
 				final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
 				pics = (new FetchPicture()).fetch_pics(selectedCamera, 10); /*use FetchPicture to get the image for that camera*/
@@ -49,6 +55,25 @@ public class TrafficCamIntent extends Activity
 		        Gallery g = (Gallery) findViewById(R.id.gallery);
 		        // Set the adapter to our custom adapter (below)
 		        g.setAdapter(new ImageAdapter(c, pics));
+		        // Set a item click listener, and just Toast the clicked position
+		        g.setOnItemClickListener(new OnItemClickListener() {
+		            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+		            	String a = pics.get(position).toString();
+		                Toast.makeText(TrafficCamIntent.this, "" + a, Toast.LENGTH_SHORT).show();
+		            }
+		        });
+		        g.setOnLongClickListener(new View.OnLongClickListener()
+				{
+		        	@Override
+					public boolean onLongClick(View v) {
+						// TODO Auto-generated method stub
+						return false;
+					}
+				});
+		        
+		        
+		        // We also want to show context menu for longpressed items in the gallery
+		        registerForContextMenu(g);
 				/*ImageView iv = (ImageView) findViewById(R.id.imageholder);
 				iv.setImageDrawable(pics.get(0));//load downloaded image into the imageholder
 				final Bundle b=new Bundle();
@@ -73,6 +98,14 @@ public class TrafficCamIntent extends Activity
 			// The spinner defaults to its first item so this code can't be reached.
 			}
 		}
+    
+    
+    @Override
+    public boolean onContextItemSelected(MenuItem item) 
+    {	
+        return true;
+    }
+    
 	public class ImageAdapter extends BaseAdapter
 	{
     int mGalleryItemBackground;
@@ -94,11 +127,13 @@ public class TrafficCamIntent extends Activity
         return pics.size();
     }
 
-    public Object getItem(int position) {
-        return position;
+    public Object getItem(int position)
+    {
+        return pics.get(position);
     }
 
-    public long getItemId(int position) {
+    public long getItemId(int position)
+    {
         return position;
     }
 

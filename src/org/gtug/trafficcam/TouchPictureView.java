@@ -50,7 +50,6 @@ public class TouchPictureView extends Activity implements OnTouchListener {
 	      view.setImageDrawable(pics.get(0));
 	      view.setOnTouchListener(this);
 	      Display display = getWindowManager().getDefaultDisplay(); 
-
 	      float displayHeight = (float) display.getHeight(); //800 on the N1
 	      float displayWidth = (float) display.getWidth(); //400 on the N1
 	      float viewHeight = (float) pics.get(0).getMinimumHeight();
