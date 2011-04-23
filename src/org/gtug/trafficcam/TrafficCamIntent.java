@@ -4,23 +4,24 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class TrafficCamIntent extends Activity 
 {
@@ -99,6 +100,27 @@ public class TrafficCamIntent extends Activity
 			}
 		}
     
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.trafficcam_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+        case R.id.info:
+            //info();
+            return true;
+        case R.id.preferences:
+            //showHelp();
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
     
     @Override
     public boolean onContextItemSelected(MenuItem item) 
@@ -152,6 +174,6 @@ public class TrafficCamIntent extends Activity
     }
 
     private Context mContext;
-    private ArrayList<Drawable> pics;
+    private ArrayList<Drawable> pics;    
 }
 }

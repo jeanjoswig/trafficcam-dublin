@@ -20,6 +20,7 @@
 		android:layout_height="wrap_content"
 		android:baselineAlignBottom="false"
 		android:layout_gravity="center"/>
+		
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:layout_marginTop="10dip"
