@@ -67,6 +67,7 @@ public class FetchPicture {
 			android.util.Log.e("Problem", "Exception fetching data", t);	
 			dirs.add("Error");
 		}
+		Collections.reverse(pics);
 		return pics;
 	}
 	
