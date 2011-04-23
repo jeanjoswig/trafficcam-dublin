@@ -13,27 +13,6 @@
 	Images from Dublin City Council, PSI data used under EU Directive 2003/98/EC, Statutory Instrument 279 of 2005.
 	</string>
 	<string-array name="cameras_array">
-		<item>M1-Balbriggan</item>
-		<item>M50-Ballinteer</item>
-		<item>M50-Edmondstown</item>
-		<item>M50-Firhouse</item>
-		<item>M50-Tallaght</item>
-		<item>M50-Greenhills Park</item>
-		<item>M50-Ballymount</item>
-		<item>M50-Red Cow</item>
-		<item>M50-Red Cow Slip</item>
-		<item>Naas road-Newlands cross</item>
-		<item>M50-Lucan</item>
-		<item>M50-Blanchardstown Roundabout</item>
-		<item>M50-South of Finglas Roundabout</item>
-		<item>M50-Ballymun</item>
-		<item>M1-Port Tunnel Works</item>
-		<item>M1-M50</item>
-		<item>N32-Malahide Road</item>
-		<item>M1-Airport</item>
-		<item>M1-Drynam</item>
-		<item>M1-Malahide Estuary</item>
-		<item>M1-Lissenhall</item>
 		<item>Dame Street from Civic Offices</item>
 		<item>John\'s Road-SCR</item>
 		<item>John\'s Road West</item>
@@ -62,29 +41,29 @@
 		<item>Drumcondra Road</item>
 		<item>North Strand Road</item>
 		<item>Constitution Hill</item>
+		<item>M1-Balbriggan</item>
+		<item>M50-Ballinteer</item>
+		<item>M50-Edmondstown</item>
+		<item>M50-Firhouse</item>
+		<item>M50-Tallaght</item>
+		<item>M50-Greenhills Park</item>
+		<item>M50-Ballymount</item>
+		<item>M50-Red Cow</item>
+		<item>M50-Red Cow Slip</item>
+		<item>Naas road-Newlands cross</item>
+		<item>M50-Lucan</item>
+		<item>M50-Blanchardstown Roundabout</item>
+		<item>M50-South of Finglas Roundabout</item>
+		<item>M50-Ballymun</item>
+		<item>M1-Port Tunnel Works</item>
+		<item>M1-M50</item>
+		<item>N32-Malahide Road</item>
+		<item>M1-Airport</item>
+		<item>M1-Drynam</item>
+		<item>M1-Malahide Estuary</item>
+		<item>M1-Lissenhall</item>		
 	</string-array>
 	<string-array name="camera_filenames">
-		<item>Site0Camera109.jpg</item>
-		<item>Site0Camera73.jpg</item>
-		<item>Site0Camera74.jpg</item>
-		<item>Site0Camera75.jpg</item>
-		<item>Site0Camera77.jpg</item>
-		<item>Site0Camera81.jpg</item>
-		<item>Site0Camera78.jpg</item>
-		<item>Site0Camera79.jpg</item>
-		<item>Site0Camera80.jpg</item>
-		<item>Site0Camera85.jpg</item>
-		<item>Site0Camera82.jpg</item>
-		<item>Site0Camera71.jpg</item>
-		<item>Site0Camera87.jpg</item>
-		<item>Site0Camera96.jpg</item>
-		<item>Site0Camera95.jpg</item>
-		<item>Site0Camera94.jpg</item>
-		<item>Site0Camera91.jpg</item>
-		<item>Site0Camera110.jpg</item>
-		<item>Site0Camera111.jpg</item>
-		<item>Site0Camera112.jpg</item>
-		<item>Site0Camera113.jpg</item>
 		<item>Site0Camera21.jpg</item>
 		<item>Site0Camera15.jpg</item>
 		<item>Site0Camera163.jpg</item>
@@ -113,5 +92,27 @@
 		<item>Site0Camera27.jpg</item>
 		<item>Site0Camera24.jpg</item>
 		<item>Site0Camera131.jpg</item>
+		<item>Site0Camera109.jpg</item>
+		<item>Site0Camera73.jpg</item>
+		<item>Site0Camera74.jpg</item>
+		<item>Site0Camera75.jpg</item>
+		<item>Site0Camera77.jpg</item>
+		<item>Site0Camera81.jpg</item>
+		<item>Site0Camera78.jpg</item>
+		<item>Site0Camera79.jpg</item>
+		<item>Site0Camera80.jpg</item>
+		<item>Site0Camera85.jpg</item>
+		<item>Site0Camera82.jpg</item>
+		<item>Site0Camera71.jpg</item>
+		<item>Site0Camera87.jpg</item>
+		<item>Site0Camera96.jpg</item>
+		<item>Site0Camera95.jpg</item>
+		<item>Site0Camera94.jpg</item>
+		<item>Site0Camera91.jpg</item>
+		<item>Site0Camera110.jpg</item>
+		<item>Site0Camera111.jpg</item>
+		<item>Site0Camera112.jpg</item>
+		<item>Site0Camera113.jpg</item>
+		
 	</string-array>
 </resources>
