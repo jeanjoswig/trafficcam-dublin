@@ -48,7 +48,7 @@ public class FetchPicture {
 	 */
 	ArrayList<Drawable> fetch_pics(String cam, int num) {
 		final 
-		HttpGet getMethod = new HttpGet(base_address);		
+		HttpGet getMethod = new HttpGet(base_address + cam);		
 		
 		try 
 		{
@@ -58,7 +58,7 @@ public class FetchPicture {
 			dirs = parse_dirs(responseBody);			
 			
 			for (int i=0; i < num; i++) {
-				URL im = new URL(base_address + dirs.get(i) + cam);
+				URL im = new URL(base_address + cam + "/" + dirs.get(i));
 				InputStream is = (InputStream)im.getContent();
 				pics.add(Drawable.createFromStream(is, cam));
 								
@@ -83,7 +83,7 @@ public class FetchPicture {
 	 */
 	ArrayList<String> parse_dirs(String body) {
 		ArrayList<String> st = new ArrayList<String>(); 
-		Pattern p = Pattern.compile("[0-9]+/");
+		Pattern p = Pattern.compile("(?<=^|> )[^><]\\d+\\.jpg+?(?=<|$)");
 		Matcher m = p.matcher(body);		
 		while(m.find()) {
 			st.add(m.group());
