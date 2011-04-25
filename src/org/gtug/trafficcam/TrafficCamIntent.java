@@ -8,21 +8,27 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 public class TrafficCamIntent extends Activity 
 {
+	
+	ProgressBar myProgressBar;
+	 
 	ArrayList<Drawable> pics = new ArrayList<Drawable>();
     /** Called when the activity is first created. */
 	@Override
@@ -33,7 +39,7 @@ public class TrafficCamIntent extends Activity
 		Spinner s = (Spinner) findViewById(R.id.Spinner01);
 		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
 		s.setOnItemSelectedListener(l);
-	
+	    
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
 		s.setAdapter(adapter);
@@ -46,7 +52,7 @@ public class TrafficCamIntent extends Activity
 			{
 				Context c = getBaseContext();
 				Resources res = getResources();
-				
+		
 				String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
 				final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
 				pics = (new FetchPicture()).fetch_pics(selectedCamera, 10); /*use FetchPicture to get the image for that camera*/
@@ -98,6 +104,29 @@ public class TrafficCamIntent extends Activity
 			}
 		}
     
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.trafficcam_menu, menu);
+        return true;
+    }
+
+    //Menu with just 2 entries: info and preferences
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+        case R.id.info:
+        	// Should display text from strings.xml (dialog?)
+            //info();
+            return true;
+        case R.id.preferences:
+            // Preferences screen to be defined
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
     
     @Override
     public boolean onContextItemSelected(MenuItem item) 
@@ -151,6 +180,6 @@ public class TrafficCamIntent extends Activity
     }
 
     private Context mContext;
-    private ArrayList<Drawable> pics;
+    private ArrayList<Drawable> pics;    
 }
 }
