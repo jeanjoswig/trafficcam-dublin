@@ -78,20 +78,23 @@ public class TrafficCamIntent extends Activity
 		        {
 		        	public void run()
 		        	{
-		        g.setAdapter(new ImageAdapter(c, pics));
-		        // Set a item click listener, and just Toast the clicked position
-		        g.setOnItemClickListener(new OnItemClickListener() 
-		        {
-		            public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
-		            {
-		            	String a = pics.get(position).toString();
-		                Toast.makeText(TrafficCamIntent.this, "" + a, Toast.LENGTH_SHORT).show();
-		            }
-		        });
-		        // We also want to show context menu for longpressed items in the gallery
-		        registerForContextMenu(g);
-		        setProgressBarIndeterminateVisibility(false);
-			    }
+		        	g.setAdapter(new ImageAdapter(c, pics));
+			        //Set the view to show the most recent picture, which is farthest to the right.
+		        	int right = g.getCount() -1;
+			        g.setSelection(right);
+			        // Set a item click listener, and just Toast the drawable name at that position.
+			        g.setOnItemClickListener(new OnItemClickListener() 
+			        {
+			            public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
+			            {
+			            	String a = pics.get(position).toString();
+			                Toast.makeText(TrafficCamIntent.this, "" + a, Toast.LENGTH_SHORT).show();
+			            }
+			        });
+			        // We also want to show context menu for longpressed items in the gallery
+			        registerForContextMenu(g);
+			        setProgressBarIndeterminateVisibility(false);
+				    }
 			});
 			    }
 			}
