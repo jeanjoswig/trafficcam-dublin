@@ -84,6 +84,7 @@ public class FetchPicture {
 	ArrayList<String> parse_dirs(String body) {
 		ArrayList<String> st = new ArrayList<String>(); 
 		Pattern p = Pattern.compile("(?<=^|> )[^><]\\d+\\.jpg+?(?=<|$)");
+		// (?<=age/)[^"]+(?="/>) for GAE, need to create a serve _specific_pic
 		Matcher m = p.matcher(body);		
 		while(m.find()) {
 			st.add(m.group());
