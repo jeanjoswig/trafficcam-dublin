@@ -2,7 +2,7 @@
 <resources>
 	<string name="app_name">Dublin Traffic Cams</string>
 	<string name="camera_prompt">Choose a camera</string>
-	<string name="longpress_hint">Long-press a picture to get a better look at it.</string>
+	<string name="context_menu_1">Expand Picture</string>
 	<string name="info">Info</string>
 	<string name="preferences">Preferences</string>
 	<string name="about">Dublin Traffic Cams 
