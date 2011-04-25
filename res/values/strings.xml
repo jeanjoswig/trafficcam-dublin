@@ -3,6 +3,8 @@
 	<string name="app_name">Dublin Traffic Cams</string>
 	<string name="camera_prompt">Choose a camera</string>
 	<string name="context_menu_1">Expand Picture</string>
+	<string name="context_menu_2">Save Picture</string>
+	<string name="context_menu_3">Send Picture</string>
 	<string name="info">Info</string>
 	<string name="preferences">Preferences</string>
 	<string name="about_text">Dublin Traffic Cams\n
