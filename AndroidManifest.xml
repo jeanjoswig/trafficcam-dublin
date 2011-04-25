@@ -16,6 +16,9 @@
         <activity android:name=".TouchPictureView"
                   android:label="@string/app_name">
         </activity>
+        <activity 	android:name=".About"
+        			android:label="@string/app_name">
+       	</activity>
     </application>
     
 </manifest>

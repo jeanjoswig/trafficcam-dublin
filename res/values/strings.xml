@@ -5,10 +5,10 @@
 	<string name="context_menu_1">Expand Picture</string>
 	<string name="info">Info</string>
 	<string name="preferences">Preferences</string>
-	<string name="about">Dublin Traffic Cams 
-	Rory Glynn (@ankhwatcher)
-	Jean Joswig
-	Raphael Savina (@raphaelsavina)
+	<string name="about_text">Dublin Traffic Cams\n
+	Rory Glynn (@ankhwatcher)\n
+	Jean Joswig\n
+	Raphael Savina (@raphaelsavina)\n\n
 	 
 	Images from Dublin City Council, PSI data used under EU Directive 2003/98/EC, Statutory Instrument 279 of 2005.
 	</string>

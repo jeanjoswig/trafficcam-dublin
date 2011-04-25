@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -78,7 +79,6 @@ public class TrafficCamIntent extends Activity
 		        	public void run()
 		        	{
 		        g.setAdapter(new ImageAdapter(c, pics));
-		        setProgressBarIndeterminateVisibility(false);
 		        // Set a item click listener, and just Toast the clicked position
 		        g.setOnItemClickListener(new OnItemClickListener() 
 		        {
@@ -90,6 +90,7 @@ public class TrafficCamIntent extends Activity
 		        });
 		        // We also want to show context menu for longpressed items in the gallery
 		        registerForContextMenu(g);
+		        setProgressBarIndeterminateVisibility(false);
 			    }
 			});
 			    }
@@ -137,6 +138,8 @@ public class TrafficCamIntent extends Activity
         case R.id.info:
         	// Should display text from strings.xml (dialog?)
             //info();
+        	Intent i = new Intent(this, About.class);
+        	startActivity(i);
             return true;
         case R.id.preferences:
             // Preferences screen to be defined
