@@ -10,23 +10,22 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 
 
@@ -89,34 +88,19 @@ public class TrafficCamIntent extends Activity
 			            {
 			            	String a = pics.get(position).toString();
 			                Toast.makeText(TrafficCamIntent.this, "" + a, Toast.LENGTH_SHORT).show();
+			                
 			            }
 			        });
 			        // We also want to show context menu for longpressed items in the gallery
-			        registerForContextMenu(g);
 			        setProgressBarIndeterminateVisibility(false);
+			        registerForContextMenu(g);
 				    }
 			});
 			    }
 			}
 			).start();
-			}
 			
-		public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) 
-			{
-				menu.add(R.string.context_menu_1);
 			}
-		public boolean onContextItemSelected(MenuItem item)
-			{
-				AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-				Toast.makeText(TrafficCamIntent.this, "Longpress: " + info.position, Toast.LENGTH_SHORT).show();
-				return true;
-				/*ImageView iv = (ImageView) findViewById(R.id.imageholder);
-				iv.setImageDrawable(pics.get(0));//load downloaded image into the imageholder
-				final Bundle b=new Bundle();
-				b.putString("selectedCamera", selectedCamera);
-				iv.setOnLongClickListener(new View.OnLongClickListener()*/
-			}
-		
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0)
@@ -124,23 +108,64 @@ public class TrafficCamIntent extends Activity
 			// The spinner defaults to its first item so this code can't be reached.
 			}
 		}
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
+    {
+    	super.onCreateContextMenu(menu, v, menuInfo);
+    	MenuInflater inflater = getMenuInflater();
+    	inflater.inflate(R.menu.traffficcam_context,menu);
+    }
+	@Override
+    public boolean onContextItemSelected(MenuItem item)
+	{
+		
+		Toast.makeText(TrafficCamIntent.this, "" + item, Toast.LENGTH_SHORT).show();
+		//AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		/*int context1 = R.string.context_menu_1;*/
+        switch (item.getItemId()) 
+        {
+        case R.id.view:
+        	
+        	/*File file = new File(this.getCacheDir(), "temp.bmp");
+        	try {
+        		createBitmap(item);
+        	       FileOutputStream out = new FileOutputStream(file);
+        	       this.compress(Bitmap.CompressFormat.PNG, 90, out);
+        		} 
+        	catch (Exception e) 
+        		{
+        	       e.printStackTrace();
+        		}
+        	Intent viewPic = new Intent(this, TouchPictureView.class);
+        	startActivity(viewPic);*/
+        	
+            return true;
+        case R.string.save:
+            // Preferences screen to be defined
+            return true;
+        case R.string.send:
+            // Preferences screen to be defined
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
     
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) 
+    	{
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.trafficcam_menu, menu);
         return true;
-    }
-
+    	}
     //Menu with just 2 entries: info and preferences
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle item selection
         switch (item.getItemId()) 
         {
         case R.id.info:
-        	// Should display text from strings.xml (dialog?)
-            //info();
         	Intent i = new Intent(this, About.class);
         	startActivity(i);
             return true;
@@ -152,55 +177,49 @@ public class TrafficCamIntent extends Activity
         }
     }
     
-    @Override
-    public boolean onContextItemSelected(MenuItem item) 
-    {	
-        return true;
-    }
-    
 	public class ImageAdapter extends BaseAdapter
 	{
-    int mGalleryItemBackground;
+		int mGalleryItemBackground;
     
-    public ImageAdapter(Context c, ArrayList<Drawable> loadedPics)
-    {
-        mContext = c;
-        TypedArray a = obtainStyledAttributes(R.styleable.Gallery1);
-        mGalleryItemBackground = a.getResourceId(R.styleable.Gallery1_android_galleryItemBackground, 0);
-        a.recycle();
-        pics = loadedPics;
-    }
+		public ImageAdapter(Context c, ArrayList<Drawable> loadedPics)
+		{
+			mContext = c;
+			TypedArray a = obtainStyledAttributes(R.styleable.Gallery1);
+			mGalleryItemBackground = a.getResourceId(R.styleable.Gallery1_android_galleryItemBackground, 0);
+			a.recycle();
+			pics = loadedPics;
+		}
     
-    public int getCount() 
-    {
-        return pics.size();
-    }
+		public int getCount() 
+		{
+			return pics.size();
+		}
 
-    public Object getItem(int position)
-    {
-        return pics.get(position);
-    }
+		public Object getItem(int position)
+		{
+			return pics.get(position);
+		}
 
-    public long getItemId(int position)
-    {
-        return position;
-    }
+		public long getItemId(int position)
+		{
+			return position;
+		}
 
-    public View getView(int position, View convertView, ViewGroup parent) 
-    {
-        ImageView i = new ImageView(mContext);
+		public View getView(int position, View convertView, ViewGroup parent) 
+		{
+			ImageView i = new ImageView(mContext);
 
-        i.setImageDrawable(pics.get(position));
-        i.setScaleType(ImageView.ScaleType.FIT_XY);
-        i.setLayoutParams(new Gallery.LayoutParams((int)Math.rint(1.75*pics.get(0).getMinimumWidth()),(int)Math.rint(1.75*pics.get(0).getMinimumHeight())));
+			i.setImageDrawable(pics.get(position));
+			i.setScaleType(ImageView.ScaleType.FIT_XY);
+			i.setLayoutParams(new Gallery.LayoutParams((int)Math.rint(1.75*pics.get(0).getMinimumWidth()),(int)Math.rint(1.75*pics.get(0).getMinimumHeight())));
         
-        // The preferred Gallery item background
-        i.setBackgroundResource(mGalleryItemBackground);
+			// The preferred Gallery item background
+			i.setBackgroundResource(mGalleryItemBackground);
         
-        return i;
-    }
+        	return i;
+		}
 
-    private Context mContext;
-    private ArrayList<Drawable> pics;
-}
+		private Context mContext;
+		private ArrayList<Drawable> pics;
+	}
 }
