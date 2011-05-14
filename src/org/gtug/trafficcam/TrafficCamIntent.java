@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -31,20 +32,28 @@ import android.widget.Toast;
 
 public class TrafficCamIntent extends Activity 
 {
+	public static final String PREFS_NAME = "MyPrefsFile";
+	private ArrayList<Drawable> pics = new ArrayList<Drawable>();
+	private int fetchNumber = 1;
 
-	
-	 
-	ArrayList<Drawable> pics = new ArrayList<Drawable>();
-    /** Called when the activity is first created. */
+    /** Called when the activity is first created. **/
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 		{
 		super.onCreate(savedInstanceState);
+	       
 		// Request progress bar
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.main);
 		setProgressBarIndeterminateVisibility(true);
-		Spinner s = (Spinner) findViewById(R.id.Spinner01);
+		Spinner s = (Spinner)findViewById(R.id.Spinner01);
+		//Restore last selection
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int spinnerPos = settings.getInt("spinnerPos", 0);
+		s.setSelection(spinnerPos);
+		s.invalidate();
+		/** Can't figure out why this isn't working, it should. Might not work with xml defined spinners. **/
+		//Set listener for Spinner
 		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
 		s.setOnItemSelectedListener(l);
 	    
@@ -55,9 +64,10 @@ public class TrafficCamIntent extends Activity
 
 	public class MyOnItemSelectedListener implements OnItemSelectedListener
 		{
-		ArrayList<Drawable> pics = new ArrayList<Drawable>();
+		
 		public void onItemSelected(AdapterView<?> parent, View view, final int pos, long id)
 			{
+
 			setProgressBarIndeterminateVisibility(true);
 			
 			new Thread(new Runnable() 
@@ -66,10 +76,17 @@ public class TrafficCamIntent extends Activity
 			    {
 			    final Context c = getBaseContext();
 				Resources res = getResources();
-
+				SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+				//Save Spinner Position to Shared Preferences
+				SharedPreferences.Editor editor = settings.edit();
+			    editor.putInt("spinnerPos", pos);
+			    editor.commit();
+			      
 				String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
 				final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
-				pics = (new FetchPicture()).fetch_pics(selectedCamera, 10); /*use FetchPicture to get the image for that camera*/
+				// Restore number of pictures to fetch preference
+				fetchNumber = settings.getInt("fetchNumber", 2);
+				pics = (new FetchPicture()).fetch_pics(selectedCamera, fetchNumber); /*use FetchPicture to get the image for that camera*/
 				// Reference the Gallery view
 		        final Gallery g = (Gallery) findViewById(R.id.gallery);
 		        // Set the adapter to our custom adapter (below)
@@ -119,14 +136,18 @@ public class TrafficCamIntent extends Activity
     public boolean onContextItemSelected(MenuItem item)
 	{
 		
-		Toast.makeText(TrafficCamIntent.this, "" + item, Toast.LENGTH_SHORT).show();
+		Toast.makeText(TrafficCamIntent.this, "" + item.getMenuInfo().toString(), Toast.LENGTH_SHORT).show();
 		//AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		/*int context1 = R.string.context_menu_1;*/
         switch (item.getItemId()) 
         {
         case R.id.view:
         	
-        	/*File file = new File(this.getCacheDir(), "temp.bmp");
+        	/*int picsSize = pics.size();
+        	Intent viewPic = new Intent(this, TouchPictureView.class);
+        	startActivity(viewPic);
+        	Drawable image = pics.get(0);
+        	File file = new File(this.getCacheDir(), "temp.bmp");
         	try {
         		createBitmap(item);
         	       FileOutputStream out = new FileOutputStream(file);
@@ -136,15 +157,34 @@ public class TrafficCamIntent extends Activity
         		{
         	       e.printStackTrace();
         		}
-        	Intent viewPic = new Intent(this, TouchPictureView.class);
-        	startActivity(viewPic);*/
+        		http://mobile.tutsplus.com/tutorials/android/android-sdk-sending-pictures-the-easy-way/
+        	*/
         	
             return true;
         case R.string.save:
-            // Preferences screen to be defined
+            // Save file to folder so Android Gallery will index it.
             return true;
         case R.string.send:
-            // Preferences screen to be defined
+            // Launch the share resource system for this file which will allow it to be sent
+        	/*Intent sharePic = new Intent();
+        	sharePic.setAction(Intent.ACTION_SEND);
+        	
+        	File downloadedPic =  new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"q.jpeg");
+        	Bitmap bitmap = ((BitmapDrawable)image).getBitmap();
+        	try 
+        		{
+				FileOutputStream out = new FileOutputStream(bitmap);
+				this.compress(Bitmap.CompressFormat.PNG, 90, out);
+        		} 
+        	catch (FileNotFoundException e)
+        		{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+        		}
+
+            sharePic.setType("image/png");
+            sharePic.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(downloadedPic));
+        	*/
             return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -166,11 +206,13 @@ public class TrafficCamIntent extends Activity
         switch (item.getItemId()) 
         {
         case R.id.info:
-        	Intent i = new Intent(this, About.class);
-        	startActivity(i);
+        	Intent about = new Intent(this, About.class);
+        	startActivity(about);
             return true;
         case R.id.preferences:
             // Preferences screen to be defined
+        	Intent prefs = new Intent(this, Preferences.class);
+        	startActivity(prefs);
             return true;
         default:
             return super.onOptionsItemSelected(item);

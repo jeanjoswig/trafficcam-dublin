@@ -12,6 +12,7 @@
 	Jean Joswig\n
 	Raphael Savina (@raphaelsavina)\n\nImages from Dublin City Council, PSI data used under EU Directive 2003/98/EC, Statutory Instrument 279 of 2005.
 	</string>
+	<string name="fetchNumberText">Number Of Pictures To Display</string>
 	<string-array name="cameras_array">
 		<item>Dame Street from Civic Offices</item>
 		<item>John\'s Road-SCR</item>
