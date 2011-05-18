@@ -40,26 +40,11 @@ public class TrafficCamIntent extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 		{
-		super.onCreate(savedInstanceState);
-	       
 		// Request progress bar
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.main);
-		setProgressBarIndeterminateVisibility(true);
-		Spinner s = (Spinner)findViewById(R.id.Spinner01);
-		//Restore last selection
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		int spinnerPos = settings.getInt("spinnerPos", 0);
-		s.setSelection(spinnerPos);
-		s.invalidate();
-		/** Can't figure out why this isn't working, it should. Might not work with xml defined spinners. **/
-		//Set listener for Spinner
-		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
-		s.setOnItemSelectedListener(l);
-	    
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-		s.setAdapter(adapter);
+		this.drawInterface();
+		super.onCreate(savedInstanceState);
 		}
 
 	public class MyOnItemSelectedListener implements OnItemSelectedListener
@@ -98,16 +83,16 @@ public class TrafficCamIntent extends Activity
 			        //Set the view to show the most recent picture, which is farthest to the right.
 		        	int right = g.getCount() -1;
 			        g.setSelection(right);
-			        // Set a item click listener, and just Toast the drawable name at that position.
+			        /* Set a item click listener, and just Toast the drawable name at that position.
 			        g.setOnItemClickListener(new OnItemClickListener() 
 			        {
 			            public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
 			            {
-			            	String a = pics.get(position).toString();
+			            	String a = pics.get(position).getString();
 			                Toast.makeText(TrafficCamIntent.this, "" + a, Toast.LENGTH_SHORT).show();
 			                
 			            }
-			        });
+			        });*/
 			        // We also want to show context menu for longpressed items in the gallery
 			        setProgressBarIndeterminateVisibility(false);
 			        registerForContextMenu(g);
@@ -264,4 +249,31 @@ public class TrafficCamIntent extends Activity
 		private Context mContext;
 		private ArrayList<Drawable> pics;
 	}
+	
+	protected void drawInterface()
+	{
+		// Request progress bar
+
+		setProgressBarIndeterminateVisibility(true);
+		Spinner s = (Spinner)findViewById(R.id.Spinner01);
+		//Restore last selection
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int spinnerPos = settings.getInt("spinnerPos", 0);
+		s.setSelection(spinnerPos);
+		s.invalidate();
+		/** Can't figure out why this isn't working, it should. Might not work with xml defined spinners. **/
+		//Set listener for Spinner
+		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
+		s.setOnItemSelectedListener(l);
+	    
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+		s.setAdapter(adapter);
+	}
+	@Override
+	protected void onResume()
+		{
+		this.drawInterface();
+		super.onResume();
+		}
 }
