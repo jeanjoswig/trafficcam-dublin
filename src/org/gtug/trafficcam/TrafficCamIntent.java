@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -35,6 +34,7 @@ public class TrafficCamIntent extends Activity
 	public static final String PREFS_NAME = "MyPrefsFile";
 	private ArrayList<Drawable> pics = new ArrayList<Drawable>();
 	private int fetchNumber = 1;
+	private int spinnerPos;
 
     /** Called when the activity is first created. **/
 	@Override
@@ -46,10 +46,41 @@ public class TrafficCamIntent extends Activity
 		this.drawInterface();
 		super.onCreate(savedInstanceState);
 		}
+	@Override
+	protected void onResume()
+		{
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		if (fetchNumber != settings.getInt("fetchNumber", 2))
+		{
+		this.drawInterface();
+		}
+		super.onResume();
+		}
+	
+	protected void drawInterface()
+		{
+		// Request progress spinner
+		setProgressBarIndeterminateVisibility(true);
+		//Define Camera Name Spinner
+		Spinner s = (Spinner)findViewById(R.id.Spinner01);
+		//Restore last selection
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		spinnerPos = settings.getInt("spinnerPos", 0);
 
+		/** Can't figure out why this isn't working, it should. Might not work with xml defined spinners. **/
+		//Set listener for Spinner
+		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
+		s.setOnItemSelectedListener(l);
+	    
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+		s.setAdapter(adapter);
+		s.setSelection(spinnerPos);
+		s.invalidate();
+		}
+	
 	public class MyOnItemSelectedListener implements OnItemSelectedListener
 		{
-		
 		public void onItemSelected(AdapterView<?> parent, View view, final int pos, long id)
 			{
 
@@ -245,35 +276,7 @@ public class TrafficCamIntent extends Activity
         
         	return i;
 		}
-
 		private Context mContext;
 		private ArrayList<Drawable> pics;
 	}
-	
-	protected void drawInterface()
-	{
-		// Request progress bar
-
-		setProgressBarIndeterminateVisibility(true);
-		Spinner s = (Spinner)findViewById(R.id.Spinner01);
-		//Restore last selection
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		int spinnerPos = settings.getInt("spinnerPos", 0);
-		s.setSelection(spinnerPos);
-		s.invalidate();
-		/** Can't figure out why this isn't working, it should. Might not work with xml defined spinners. **/
-		//Set listener for Spinner
-		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
-		s.setOnItemSelectedListener(l);
-	    
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-		s.setAdapter(adapter);
-	}
-	@Override
-	protected void onResume()
-		{
-		this.drawInterface();
-		super.onResume();
-		}
 }

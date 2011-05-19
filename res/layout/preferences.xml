@@ -8,7 +8,6 @@
 			android:text="@string/fetchNumberText"
 			android:layout_height="wrap_content" />
 		<SeekBar
-			android:progress="1"
 			android:id="@+id/fetchSeek"
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"

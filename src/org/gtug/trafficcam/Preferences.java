@@ -28,23 +28,24 @@ public class Preferences extends Activity implements SeekBar.OnSeekBarChangeList
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.preferences);
+		TextView fetchCurrent = (TextView)findViewById(R.id.fetchCurrent);
+		fetchCurrent.setText("Selected: " + 1);
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-	    fetchNumber = settings.getInt("fetchNumber", 3);
+	    fetchNumber = settings.getInt("fetchNumber", 2);
         fetchSeekBar = (SeekBar)findViewById(R.id.fetchSeek);
         fetchSeekBar.setOnSeekBarChangeListener(this);
-        fetchSeekBar.setProgress(fetchNumber);
+        fetchSeekBar.setProgress(fetchNumber-1);
 	}
 
 	
 	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch)
 	{
 		TextView fetchCurrent;
-		fetchCurrent = (TextView)findViewById(R.id.fetchCurrent);
-		fetchNumber = progress;
+		fetchCurrent = (TextView)findViewById(R.id.fetchCurrent);		
+			fetchNumber = progress;
 		//Make sure that fetchNumer isn't set to zero
-		fetchNumber++;
 		//Display the current selection.
-		fetchCurrent.setText("Selected: " + fetchNumber);
+		fetchCurrent.setText("Selected: " + (progress+1));
 	}
 
 	
@@ -60,7 +61,7 @@ public class Preferences extends Activity implements SeekBar.OnSeekBarChangeList
 	      
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-	    editor.putInt("fetchNumber", fetchNumber);
+	    editor.putInt("fetchNumber", fetchNumber+1);
 	    editor.commit();
 	}
 
