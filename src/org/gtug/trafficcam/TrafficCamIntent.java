@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -152,13 +153,13 @@ public class TrafficCamIntent extends Activity
     public boolean onContextItemSelected(MenuItem item)
 	{
 		
-		Toast.makeText(TrafficCamIntent.this, "" + item.getMenuInfo().toString(), Toast.LENGTH_SHORT).show();
+		
 		//AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		/*int context1 = R.string.context_menu_1;*/
         switch (item.getItemId()) 
         {
         case R.id.view:
-        	
+        	Toast.makeText(TrafficCamIntent.this, getString(item.getItemId()), Toast.LENGTH_SHORT).show();
         	/*int picsSize = pics.size();
         	Intent viewPic = new Intent(this, TouchPictureView.class);
         	startActivity(viewPic);
@@ -178,9 +179,11 @@ public class TrafficCamIntent extends Activity
         	
             return true;
         case R.string.save:
+        	Toast.makeText(TrafficCamIntent.this, "" + item.getMenuInfo().toString(), Toast.LENGTH_SHORT).show();
             // Save file to folder so Android Gallery will index it.
             return true;
         case R.string.send:
+        	Toast.makeText(TrafficCamIntent.this, "" + item.getMenuInfo().toString(), Toast.LENGTH_SHORT).show();
             // Launch the share resource system for this file which will allow it to be sent
         	/*Intent sharePic = new Intent();
         	sharePic.setAction(Intent.ACTION_SEND);
@@ -279,4 +282,27 @@ public class TrafficCamIntent extends Activity
 		private Context mContext;
 		private ArrayList<Drawable> pics;
 	}
+
+
+public boolean ExernalStoragetest ()
+{
+	boolean mExternalStorageWriteable = false;
+	String state = Environment.getExternalStorageState();
+
+	if (Environment.MEDIA_MOUNTED.equals(state))
+	{
+	    // We can read and write the media
+	    mExternalStorageWriteable = true;
+	} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state))
+	{
+	    // We can only read the media
+	    mExternalStorageWriteable = false;
+	} else
+	{
+	    // Something else is wrong. It may be one of many other states, but all we need
+	    //  to know is we can neither read nor write
+	    mExternalStorageWriteable = false;
+	}
+	return mExternalStorageWriteable;
+}
 }

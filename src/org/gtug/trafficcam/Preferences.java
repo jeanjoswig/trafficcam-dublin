@@ -46,6 +46,13 @@ public class Preferences extends Activity implements SeekBar.OnSeekBarChangeList
 		//Make sure that fetchNumer isn't set to zero
 		//Display the current selection.
 		fetchCurrent.setText("Selected: " + (progress+1));
+		if (progress == 0)
+		{
+			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+			SharedPreferences.Editor editor = settings.edit();
+		    editor.putInt("fetchNumber", progress+1);
+		    editor.commit();
+		}
 	}
 
 	
