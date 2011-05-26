@@ -1,5 +1,10 @@
 package org.gtug.trafficcam;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -9,8 +14,11 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -115,16 +123,6 @@ public class TrafficCamIntent extends Activity
 			        //Set the view to show the most recent picture, which is farthest to the right.
 		        	int right = g.getCount() -1;
 			        g.setSelection(right);
-			        /* Set a item click listener, and just Toast the drawable name at that position.
-			        g.setOnItemClickListener(new OnItemClickListener() 
-			        {
-			            public void onItemClick(AdapterView<?> parent, View v, int position, long id) 
-			            {
-			            	String a = pics.get(position).getString();
-			                Toast.makeText(TrafficCamIntent.this, "" + a, Toast.LENGTH_SHORT).show();
-			                
-			            }
-			        });*/
 			        // We also want to show context menu for longpressed items in the gallery
 			        setProgressBarIndeterminateVisibility(false);
 			        registerForContextMenu(g);
@@ -178,12 +176,15 @@ public class TrafficCamIntent extends Activity
         	*/
         	
             return true;
-        case R.string.save:
-        	Toast.makeText(TrafficCamIntent.this, "" + item.getMenuInfo().toString(), Toast.LENGTH_SHORT).show();
+        case R.id.save:
+        	Boolean storageAvailable = ExternalStorageTest();
+        	
+        	Boolean pictureSaved = createExternalStoragePublicPicture();
+        	Toast.makeText(TrafficCamIntent.this, "External Storage Available: " + storageAvailable + "\n Picture Saved: " + pictureSaved, Toast.LENGTH_SHORT).show();
             // Save file to folder so Android Gallery will index it.
             return true;
-        case R.string.send:
-        	Toast.makeText(TrafficCamIntent.this, "" + item.getMenuInfo().toString(), Toast.LENGTH_SHORT).show();
+        case R.id.send:
+        	String deleteResult;
             // Launch the share resource system for this file which will allow it to be sent
         	/*Intent sharePic = new Intent();
         	sharePic.setAction(Intent.ACTION_SEND);
@@ -204,6 +205,16 @@ public class TrafficCamIntent extends Activity
             sharePic.setType("image/png");
             sharePic.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(downloadedPic));
         	*/
+        	if ( hasExternalStoragePublicPicture() == true)
+        	{
+        		deleteExternalStoragePublicPicture();
+        		deleteResult = "Deleted.";
+        	}
+        	else
+        	{
+        		deleteResult = "Not Found.";
+        	}
+        	Toast.makeText(TrafficCamIntent.this, "Result: Image " + deleteResult, Toast.LENGTH_SHORT).show();
             return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -237,6 +248,7 @@ public class TrafficCamIntent extends Activity
             return super.onOptionsItemSelected(item);
         }
     }
+    
     
 	public class ImageAdapter extends BaseAdapter
 	{
@@ -284,7 +296,7 @@ public class TrafficCamIntent extends Activity
 	}
 
 
-public boolean ExernalStoragetest ()
+public boolean ExternalStorageTest ()
 {
 	boolean mExternalStorageWriteable = false;
 	String state = Environment.getExternalStorageState();
@@ -304,5 +316,64 @@ public boolean ExernalStoragetest ()
 	    mExternalStorageWriteable = false;
 	}
 	return mExternalStorageWriteable;
+}
+Boolean createExternalStoragePublicPicture()
+{
+    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+    File file = new File(path, "DemoPicture.jpg");
+
+    try
+    {
+        // Make sure the Pictures directory exists.
+        path.mkdirs();
+
+        // Very simple code to copy a picture from the application's
+        // resource into the external file.  Note that this code does
+        // no error checking, and assumes the picture is small (does not
+        // try to copy it in chunks).  Note that if external storage is
+        // not currently mounted this will silently fail.
+        InputStream is = getResources().openRawResource(R.drawable.imageholder);
+        OutputStream os = new FileOutputStream(file);
+        byte[] data = new byte[is.available()];
+        is.read(data);
+        os.write(data);
+        is.close();
+        os.close();
+        
+        // Tell the media scanner about the new file so that it is
+        // immediately available to the user.
+        MediaScannerConnection.scanFile(this,
+                new String[] { file.toString() }, null,
+                new MediaScannerConnection.OnScanCompletedListener()
+        {
+            public void onScanCompleted(String path, Uri uri)
+            {
+                Log.i("ExternalStorage", "Scanned " + path + ":");
+                Log.i("ExternalStorage", "-> uri=" + uri);
+            }
+        });
+    }
+    catch (IOException e) 
+    {
+        // Unable to create file, likely because external storage is
+        // not currently mounted.
+        Log.w("ExternalStorage", "Error writing " + file, e);
+        return false;
+    }
+    return true;
+}
+
+void deleteExternalStoragePublicPicture()
+{
+    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+    File file = new File(path, "DemoPicture.jpg");
+    file.delete();
+}
+
+boolean hasExternalStoragePublicPicture()
+{
+    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+    File file = new File(path, "DemoPicture.jpg");
+    return file.exists();
 }
 }
