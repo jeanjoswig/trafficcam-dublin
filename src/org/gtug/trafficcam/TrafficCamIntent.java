@@ -3,7 +3,6 @@ package org.gtug.trafficcam;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
@@ -13,14 +12,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +48,7 @@ public class TrafficCamIntent extends Activity
 	private ArrayList<Drawable> pics = new ArrayList<Drawable>();
 	private int fetchNumber = 1;
 	private int spinnerPos;
+	private Gallery g; 
 
     /** Called when the activity is first created. **/
 	@Override
@@ -113,7 +118,7 @@ public class TrafficCamIntent extends Activity
 				fetchNumber = settings.getInt("fetchNumber", 2);
 				pics = (new FetchPicture()).fetch_pics(selectedCamera, fetchNumber); /*use FetchPicture to get the image for that camera*/
 				// Reference the Gallery view
-		        final Gallery g = (Gallery) findViewById(R.id.gallery);
+		        g = (Gallery) findViewById(R.id.gallery);
 		        // Set the adapter to our custom adapter (below)
 		        g.post(new Runnable()
 		        {
@@ -143,50 +148,82 @@ public class TrafficCamIntent extends Activity
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
     {
-    	super.onCreateContextMenu(menu, v, menuInfo);
     	MenuInflater inflater = getMenuInflater();
     	inflater.inflate(R.menu.traffficcam_context,menu);
+    	super.onCreateContextMenu(menu, v, menuInfo);
     }
 	@Override
     public boolean onContextItemSelected(MenuItem item)
 	{
+		final int galleryPos = ((AdapterView.AdapterContextMenuInfo)item.getMenuInfo()).position;
+		Resources res = getResources();
 		
+		String[] cameras_array = res.getStringArray(R.array.cameras_array);
+		String cameraName = cameras_array[spinnerPos];
 		
 		//AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		/*int context1 = R.string.context_menu_1;*/
         switch (item.getItemId()) 
         {
         case R.id.view:
-        	Toast.makeText(TrafficCamIntent.this, getString(item.getItemId()), Toast.LENGTH_SHORT).show();
-        	/*int picsSize = pics.size();
+        	//This picture Toast will be taken out later.
+        	
+        	LayoutInflater inflater = getLayoutInflater();
+        	View layout = inflater.inflate(R.layout.imagetoast,
+        	                               (ViewGroup) findViewById(R.id.toast_layout_root));
+        	ImageView image = (ImageView) layout.findViewById(R.id.toastImage);
+        	
+        	Drawable myDrawable = pics.get(galleryPos);
+        	image.setImageDrawable(myDrawable);
+        	
+        	Toast toast = new Toast(getApplicationContext());
+        	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        	toast.setDuration(Toast.LENGTH_LONG);
+        	toast.setView(layout);
+        	toast.show();
+        	/*
         	Intent viewPic = new Intent(this, TouchPictureView.class);
         	startActivity(viewPic);
-        	Drawable image = pics.get(0);
-        	File file = new File(this.getCacheDir(), "temp.bmp");
-        	try {
-        		createBitmap(item);
-        	       FileOutputStream out = new FileOutputStream(file);
-        	       this.compress(Bitmap.CompressFormat.PNG, 90, out);
-        		} 
-        	catch (Exception e) 
-        		{
-        	       e.printStackTrace();
-        		}
-        		http://mobile.tutsplus.com/tutorials/android/android-sdk-sending-pictures-the-easy-way/
+        		//http://mobile.tutsplus.com/tutorials/android/android-sdk-sending-pictures-the-easy-way/
+        		 * http://stackoverflow.com/questions/1362723/how-can-i-get-a-dialog-style-activity-window-to-fill-the-screen
         	*/
         	
             return true;
         case R.id.save:
-        	Boolean storageAvailable = ExternalStorageTest();
+            Time cDT = new Time();
+            cDT.setToNow();
+            
+            long milliTime = cDT.toMillis(false);
+            milliTime = milliTime + (galleryPos*15)*60*1000;
+            cDT.set(milliTime);
+            String pictureFileName = cameraName + cDT.format("%Y%m%d_%H%M");
+            
+            if (ExternalStorageTest() == true)
+            {
+            	Boolean picSaved = createExternalStoragePublicPicture(pictureFileName, pics.get(galleryPos));
+            	if (picSaved == true)
+            	{
+            		Toast.makeText(TrafficCamIntent.this, "Image saved as: " + pictureFileName + ".png", Toast.LENGTH_LONG).show();	
+            	}
+            	else
+            	{
+            		Toast.makeText(TrafficCamIntent.this, "Image Saving Failed.", Toast.LENGTH_LONG).show();
+            	}
+            }
+            else
+            {
+            	Toast.makeText(TrafficCamIntent.this, "External Storage Unavailable.", Toast.LENGTH_LONG).show();
+            }
+        	/*Boolean storageAvailable = ExternalStorageTest();
         	
-        	Boolean pictureSaved = createExternalStoragePublicPicture();
-        	Toast.makeText(TrafficCamIntent.this, "External Storage Available: " + storageAvailable + "\n Picture Saved: " + pictureSaved, Toast.LENGTH_SHORT).show();
+        	Boolean pictureSaved = createExternalStoragePublicPicture(item.getItemId());
+        	Toast.makeText(TrafficCamIntent.this, "External Storage Available: " + storageAvailable + "\n Picture Saved: " + pictureSaved, Toast.LENGTH_SHORT).show();*/
             // Save file to folder so Android Gallery will index it.
             return true;
         case R.id.send:
-        	String deleteResult;
+        	/*String deleteResult;
             // Launch the share resource system for this file which will allow it to be sent
-        	/*Intent sharePic = new Intent();
+        	Intent sharePic = new Intent();
         	sharePic.setAction(Intent.ACTION_SEND);
         	
         	File downloadedPic =  new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"q.jpeg");
@@ -204,7 +241,7 @@ public class TrafficCamIntent extends Activity
 
             sharePic.setType("image/png");
             sharePic.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(downloadedPic));
-        	*/
+        	
         	if ( hasExternalStoragePublicPicture() == true)
         	{
         		deleteExternalStoragePublicPicture();
@@ -214,7 +251,7 @@ public class TrafficCamIntent extends Activity
         	{
         		deleteResult = "Not Found.";
         	}
-        	Toast.makeText(TrafficCamIntent.this, "Result: Image " + deleteResult, Toast.LENGTH_SHORT).show();
+        	Toast.makeText(TrafficCamIntent.this, "Result: Image " + deleteResult, Toast.LENGTH_SHORT).show();*/
             return true;
         default:
             return super.onOptionsItemSelected(item);
@@ -317,10 +354,12 @@ public boolean ExternalStorageTest ()
 	}
 	return mExternalStorageWriteable;
 }
-Boolean createExternalStoragePublicPicture()
+Boolean createExternalStoragePublicPicture(String pictureFileName, Drawable selectedPicture)
 {
     File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-    File file = new File(path, "DemoPicture.jpg");
+    
+    File file = new File(path, pictureFileName + ".png");
+    Bitmap myBitmap = ((BitmapDrawable) selectedPicture).getBitmap();
 
     try
     {
@@ -332,12 +371,8 @@ Boolean createExternalStoragePublicPicture()
         // no error checking, and assumes the picture is small (does not
         // try to copy it in chunks).  Note that if external storage is
         // not currently mounted this will silently fail.
-        InputStream is = getResources().openRawResource(R.drawable.imageholder);
         OutputStream os = new FileOutputStream(file);
-        byte[] data = new byte[is.available()];
-        is.read(data);
-        os.write(data);
-        is.close();
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
         os.close();
         
         // Tell the media scanner about the new file so that it is
