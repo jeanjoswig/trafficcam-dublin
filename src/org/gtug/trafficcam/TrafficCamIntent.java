@@ -342,37 +342,32 @@ public boolean ExternalStorageTest ()
 	{
 	    // We can read and write the media
 	    mExternalStorageWriteable = true;
-	} else if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state))
-	{
-	    // We can only read the media
-	    mExternalStorageWriteable = false;
-	} else
+	} 
+	else 
 	{
 	    // Something else is wrong. It may be one of many other states, but all we need
-	    //  to know is we can neither read nor write
+	    //  to know is we cannot write.
 	    mExternalStorageWriteable = false;
 	}
 	return mExternalStorageWriteable;
 }
 Boolean createExternalStoragePublicPicture(String pictureFileName, Drawable selectedPicture)
 {
+	//Get the external storage location for Pictures from the Environment.
     File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-    
+    //Create a file with the name provided.
     File file = new File(path, pictureFileName + ".png");
+    //Convert the Drawable to a Bitmap
     Bitmap myBitmap = ((BitmapDrawable) selectedPicture).getBitmap();
-
     try
     {
         // Make sure the Pictures directory exists.
         path.mkdirs();
-
-        // Very simple code to copy a picture from the application's
-        // resource into the external file.  Note that this code does
-        // no error checking, and assumes the picture is small (does not
-        // try to copy it in chunks).  Note that if external storage is
-        // not currently mounted this will silently fail.
+        //Open created file as an output stream.
         OutputStream os = new FileOutputStream(file);
+        //Compress the Bitmap into a PNG format and write it to the file created.
         myBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
+        //Close the Output Stream
         os.close();
         
         // Tell the media scanner about the new file so that it is
@@ -396,19 +391,5 @@ Boolean createExternalStoragePublicPicture(String pictureFileName, Drawable sele
         return false;
     }
     return true;
-}
-
-void deleteExternalStoragePublicPicture()
-{
-    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-    File file = new File(path, "DemoPicture.jpg");
-    file.delete();
-}
-
-boolean hasExternalStoragePublicPicture()
-{
-    File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-    File file = new File(path, "DemoPicture.jpg");
-    return file.exists();
 }
 }
