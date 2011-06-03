@@ -46,4 +46,19 @@ public class FetchPicture {
 		Collections.reverse(pics);
 		return pics;
 	}
+	Drawable fetch_pic(String cam, int choice)
+	{
+		Drawable recievedPic = null;
+		try 
+		{
+				URL im = new URL(base_address + cam + "/" + choice);
+				InputStream is = (InputStream)im.getContent();
+				recievedPic = Drawable.createFromStream(is, cam);
+		} 
+		catch (Throwable t) 
+		{
+			android.util.Log.e("Problem", "Exception fetching data", t);	
+		}
+		return recievedPic;
+	}
 }

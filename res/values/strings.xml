@@ -4,7 +4,7 @@
 	<string name="camera_prompt">Choose a camera</string>
 	<string name="view">View Picture</string>
 	<string name="save">Save Picture</string>
-	<string name="send">Send Picture</string>
+	<string name="share">Share Picture</string>
 	<string name="info">Info</string>
 	<string name="preferences">Preferences</string>
 	<string name="about_text">Dublin Traffic Cams\n
