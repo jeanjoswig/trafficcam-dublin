@@ -23,8 +23,6 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -168,7 +166,7 @@ public class TrafficCamIntent extends Activity
         
         case R.id.view:
         	//This picture Toast will be taken out later.
-        	
+        	/*
         	LayoutInflater inflater = getLayoutInflater();
         	View layout = inflater.inflate(R.layout.imagetoast,
         	                               (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -178,9 +176,24 @@ public class TrafficCamIntent extends Activity
         	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
         	toast.setDuration(Toast.LENGTH_LONG);
         	toast.setView(layout);
-        	toast.show();
+        	toast.show();*/
+        	if (ExternalStorageTest() == true)
+        	{
+	        	// Launch the share resource system for this file which will allow it to be sent
+	        	Uri cachedPicUri = getDrawableUri(myDrawable); 
+	        	Intent viewPic = new Intent(android.content.Intent.ACTION_VIEW);
+	        	//viewPic.setType("image/png");
+	        	viewPic.setDataAndType(cachedPicUri, "image/png");
+	        	//viewPic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
+	        	startActivity(Intent.createChooser(viewPic, "View image in"));
+            return true;
+        	}
+        	else
+        	{
+        		Toast.makeText(TrafficCamIntent.this, "This function is unavailable as there is no access to external storage.", Toast.LENGTH_LONG).show();
+        	}
         	/*
-        	Intent viewPic = new Intent(this, TouchPictureView.class);
+        	
         	startActivity(viewPic);
         		//http://mobile.tutsplus.com/tutorials/android/android-sdk-sending-pictures-the-easy-way/
         		 * http://stackoverflow.com/questions/1362723/how-can-i-get-a-dialog-style-activity-window-to-fill-the-screen
