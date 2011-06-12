@@ -18,7 +18,9 @@ import android.graphics.drawable.Drawable;
 
 public class FetchPicture {	
 	private ArrayList<Drawable> pics = new ArrayList<Drawable>();		
-	private String base_address = "http://trafficcam-fetcher.savina.net/serve_single_pic/";
+/*	private String base_address = "http://trafficcam-fetcher.savina.net/serve_single_pic/";	*/
+	private String base_address = "http://trafficcam-fetcher.savina.net/serve_single_pic_GTUG_100/";
+
 	FetchPicture() {
 		super();
 	}
