@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView android:padding="10dip" android:layout_height="fill_parent" android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/about_text" android:id="@+id/about_content"/> 
-</ScrollView>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:orientation="vertical" android:layout_height="fill_parent">
+        <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/icon" android:id="@+id/imageView1"></ImageView>
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView2" android:text="@string/about_title" android:textSize="24sp" android:textStyle="bold"></TextView>
+        <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/about_text" android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView1" android:textSize="13sp"></TextView>
+    </LinearLayout>

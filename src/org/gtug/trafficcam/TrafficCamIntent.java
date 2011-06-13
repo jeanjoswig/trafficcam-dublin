@@ -402,7 +402,7 @@ Uri getDrawableUri (Drawable selectedPicture)
     try
     {
         // Make sure the Pictures directory exists.
-        path.mkdirs();
+        //path.mkdirs();
         //Open created file as an output stream.
         OutputStream os = new FileOutputStream(file);
         //Compress the Bitmap into a PNG format and write it to the file created.
@@ -423,7 +423,7 @@ Uri getDrawableUri (Drawable selectedPicture)
 Uri getInternalDrawableUri (Drawable selectedPicture)
 {
 	
-    File path = getCacheDir();
+    File path = getFilesDir();
     //Create a file with the name provided.
     File file = new File(path, "passedImage.png");
     
