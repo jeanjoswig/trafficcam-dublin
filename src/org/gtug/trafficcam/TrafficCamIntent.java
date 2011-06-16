@@ -1,6 +1,7 @@
 package org.gtug.trafficcam;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -61,7 +62,7 @@ public class TrafficCamIntent extends Activity
 	@Override
 	protected void onResume()
 		{
-			clearInternalCache();
+			clearInternalFiles();
 			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 			if (fetchNumber != settings.getInt("fetchNumber", 2))
 			{	
@@ -159,12 +160,12 @@ public class TrafficCamIntent extends Activity
 		Drawable myDrawable = pics.get(galleryPos);
 		String[] cameras_array = res.getStringArray(R.array.cameras_array);
 		String cameraName = cameras_array[spinnerPos];
+		Uri cachedPicUri;
 		
 		//AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		/*int context1 = R.string.context_menu_1;*/
         switch (item.getItemId()) 
         {
-        
         case R.id.view:
         	//This picture Toast will be taken out later.
         	/*
@@ -178,32 +179,20 @@ public class TrafficCamIntent extends Activity
         	toast.setDuration(Toast.LENGTH_LONG);
         	toast.setView(layout);
         	toast.show();*/
+        	
         	if (ExternalStorageTest() == true)
         	{
-	        	// Launch the share resource system for this file which will allow it to be sent
-	        	Uri cachedPicUri = getDrawableUri(myDrawable); 
-	        	Intent viewPic = new Intent(android.content.Intent.ACTION_VIEW);
-	        	//viewPic.setType("image/png");
-	        	viewPic.setDataAndType(cachedPicUri, "image/png");
-	        	//viewPic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
-	        	startActivity(Intent.createChooser(viewPic, "View image in"));
-            return true;
+	        	cachedPicUri = getExternalDrawableUri(myDrawable); 
         	}
         	else
         	{
-	        	Uri cachedPicUri = getInternalDrawableUri(myDrawable); 
-	        	Intent viewPic = new Intent(android.content.Intent.ACTION_VIEW);
-	        	viewPic.setDataAndType(cachedPicUri, "image/png");
-	        	startActivity(Intent.createChooser(viewPic, "View image in"));
-        		//Toast.makeText(TrafficCamIntent.this, "This function is unavailable as there is no access to external storage.", Toast.LENGTH_LONG).show();
-        	}
-        	/*
-        	
-        	startActivity(viewPic);
-        		//http://mobile.tutsplus.com/tutorials/android/android-sdk-sending-pictures-the-easy-way/
-        		 * http://stackoverflow.com/questions/1362723/how-can-i-get-a-dialog-style-activity-window-to-fill-the-screen
-        	*/
-        	
+        		cachedPicUri = getDrawableUri(myDrawable); 
+	        }
+        	Intent viewPic = new Intent(android.content.Intent.ACTION_VIEW);
+        	//viewPic.setType("image/png");
+        	viewPic.setDataAndType(cachedPicUri, "image/png");
+        	//viewPic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
+        	startActivity(Intent.createChooser(viewPic, "View image in"));
             return true;
         case R.id.save:
             Time cDT = new Time();
@@ -224,34 +213,29 @@ public class TrafficCamIntent extends Activity
             	else
             	{
             		Toast.makeText(TrafficCamIntent.this, "Image Saving Failed.", Toast.LENGTH_LONG).show();
+            		return false;
             	}
             }
             else
             {
             	Toast.makeText(TrafficCamIntent.this, "External Storage Unavailable.", Toast.LENGTH_LONG).show();
+            	return false;
             }
             return true;
         case R.id.share:
         	if (ExternalStorageTest() == true)
         	{
-	        	// Launch the share resource system for this file which will allow it to be sent
-	        	Uri cachedPicUri = getDrawableUri(myDrawable); 
-	        	Intent sharePic = new Intent(android.content.Intent.ACTION_SEND);
-	        	sharePic.setType("image/png");
-	        	sharePic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
-	        	startActivity(Intent.createChooser(sharePic, "Share image using"));
-        	
-            return true;
+	        	cachedPicUri = getExternalDrawableUri(myDrawable);
         	}
         	else
-        	{
-	        	Uri cachedPicUri = getInternalDrawableUri(myDrawable); 
-	        	Intent sharePic = new Intent(android.content.Intent.ACTION_SEND);
-	        	sharePic.setType("image/png");
-	        	sharePic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
-	        	startActivity(Intent.createChooser(sharePic, "Share image using"));
-        		//Toast.makeText(TrafficCamIntent.this, "This function is unavailable as there is no access to external storage.", Toast.LENGTH_LONG).show();
+        	{	//Fall back to Internal Storage
+	        	cachedPicUri = getDrawableUri(myDrawable);
         	}
+	        Intent sharePic = new Intent(android.content.Intent.ACTION_SEND);
+	        sharePic.setType("image/png");
+	        sharePic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
+	        startActivity(Intent.createChooser(sharePic, "Share image using"));
+	        return true;
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -392,23 +376,22 @@ Boolean createExternalStoragePublicPicture(String pictureFileName, Drawable sele
     return true;
 }
 
-Uri getDrawableUri (Drawable selectedPicture)
+Uri getExternalDrawableUri (Drawable selectedPicture)
 {
-    File path = getExternalCacheDir();
+	File path = getExternalCacheDir();
     //Create a file with the name provided.
     File file = new File(path, "passedImage.png");
     //Convert the Drawable to a Bitmap
     Bitmap myBitmap = ((BitmapDrawable) selectedPicture).getBitmap();
     try
     {
-        // Make sure the Pictures directory exists.
-        //path.mkdirs();
         //Open created file as an output stream.
         OutputStream os = new FileOutputStream(file);
         //Compress the Bitmap into a PNG format and write it to the file created.
         myBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
         //Close the Output Stream
         os.close();
+        
     }
     catch (IOException e) 
     {
@@ -417,46 +400,49 @@ Uri getDrawableUri (Drawable selectedPicture)
         Log.w("ExternalCacheStorage", "Error writing " + file, e); 
     }
     
-    return Uri.fromFile(file);
-    //I really don't know what this will return if it is unable to store the image.
+    Uri returnUri = Uri.fromFile(file);
+    return returnUri;
 }
-Uri getInternalDrawableUri (Drawable selectedPicture)
+Uri getDrawableUri (Drawable selectedPicture)
 {
-	
     File path = getFilesDir();
-    //Create a file with the name provided.
-    File file = new File(path, "passedImage.png");
     
+    //Create a file with the name provided.
+    
+    //String fileName = path + ;
     //Convert the Drawable to a Bitmap
     Bitmap myBitmap = ((BitmapDrawable) selectedPicture).getBitmap();
     try
     {
         //Open created file as an output stream.
-    	FileOutputStream fos = openFileOutput("passedImage.png", Context.MODE_PRIVATE);
+        FileOutputStream os = openFileOutput("passedImage.png", Context.MODE_WORLD_READABLE);
         //Compress the Bitmap into a PNG format and write it to the file created.
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
         //Close the Output Stream
-        fos.close();
+        os.close();
+    }
+    catch (FileNotFoundException e) 
+    {
+        Log.w("InternalCacheStorage", "Error writing " + path + "passedImage.png", e); 
     }
     catch (IOException e) 
     {
-        // Unable to create file, likely because external storage is
-        // not currently mounted.
-        Log.w("InternalCacheStorage", "Error writing " + file, e); 
+        Log.w("InternalCacheStorage", "Error writing " + path + "passedImage.png", e); 
     }
     
-    return Uri.fromFile(file);
-    //I really don't know what this will return if it is unable to store the image.
+    File[] internalFiles = path.listFiles();
+    Uri returnUri = Uri.fromFile(internalFiles[0]);
+    return returnUri;
 }
-Boolean clearInternalCache ()
+Boolean clearInternalFiles ()
 {
-	String[] cacheFiles = fileList();
-	if (cacheFiles.length > 0)
+	File[] internalFiles = getFilesDir().listFiles();
+	if (internalFiles.length > 0)
 	{
-		for (int i=0; i <= cacheFiles.length; i++)
+		for (int i=0; i <= internalFiles.length; i++)
 		{
-			deleteFile(cacheFiles[i]);
-			Log.i("InternalStorage", "Deleted: " + cacheFiles[i]);
+			internalFiles[i].delete();
+			Log.i("InternalStorage", "Deleted: " + internalFiles[i]);
 		}
 		return true;
 	}
