@@ -78,7 +78,37 @@
 		<item>M1-Airport</item>
 		<item>M1-Drynam</item>
 		<item>M1-Malahide Estuary</item>
-		<item>M1-Lissenhall</item>		
+		<item>M1-Lissenhall</item>	
+		<item>Belgard Airton</item>
+		<item>Belgard Cookstown</item>
+		<item>Belgard Mayberry</item>
+		<item>Belgard Sq East</item>
+		<item>Castle Road / ORR</item>
+		<item>Fonthill / Ronanstown</item>
+		<item>Greenhills Airton</item>
+		<item>Greenhills Mayberry</item>
+		<item>Greenhills Tallaght</item>
+		<item>Greenhills Tymon</item>
+		<item>Jobstown</item>
+		<item>Lucan Rd at Woodvale</item>
+		<item>N7 / City West Junction</item>
+		<item>N7 Longmile</item>
+		<item>N4 Newcastle</item>
+		<item>N7 / Rathcoole</item>
+		<item>N81 / Belgard Rd</item>
+		<item>N81 / Citwest</item>
+		<item>N81 Oldbawn</item>
+		<item>N81 Whitestown</item>
+		<item>Nangor Rd / Bawneouge Jtn</item>
+		<item>Nangor Rd / Deansrath Jtn</item>
+		<item>Nangor Road / Killeen</item>
+		<item>Nangor / Park West Junction</item>
+		<item>Nangor Rd / Yellowmeadows Junction</item>
+		<item>M50–Red Cow</item>
+		<item>ORR Fettercairn</item>
+		<item>ORR at Foxhunter</item>
+		<item>ORR Grange Castle</item>
+		<item>ORR Nangor</item>
 	</string-array>
 	<string-array name="camera_filenames">
 		<item>Site0Camera21</item>
@@ -130,6 +160,35 @@
 		<item>Site0Camera111</item>
 		<item>Site0Camera112</item>
 		<item>Site0Camera113</item>
-		
+		<item>BelgardAirton</item>
+		<item>belgardcook</item>
+		<item>belgardmayberry</item>
+		<item>BelgardSqE</item>
+		<item>Castleroad</item>
+		<item>FonthillRon</item>
+		<item>Greenhillsairton</item>
+		<item>Greenhillsmayberry</item>
+		<item>Greenhillstallaght</item>
+		<item>Greenhillstymon</item>
+		<item>Jobstown</item>
+		<item>Lucanwood</item>
+		<item>N7citywest</item>
+		<item>N7Longmile</item>
+		<item>N4newcastle</item>
+		<item>Rathcoole</item>
+		<item>N81belgard</item>
+		<item>N81Citywest</item>
+		<item>N81oldbawn</item>
+		<item>N81white</item>
+		<item>Bawneouge</item>
+		<item>Deansrath</item>
+		<item>killen</item>
+		<item>Parkwest</item>
+		<item>Yellowmeadows</item>
+		<item>m50redcow</item>
+		<item>ORRFetter</item>
+		<item>ORRFox</item>
+		<item>ORRGrange</item>
+		<item>ORRnangor</item>
 	</string-array>
 </resources>
