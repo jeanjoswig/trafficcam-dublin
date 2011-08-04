@@ -7,6 +7,7 @@
 	<string name="share">Share Picture</string>
 	<string name="info">About</string>
 	<string name="preferences">Preferences</string>
+	<string name="downloadchoice">Download Images One At A Time.</string>
 	<string name="about_title">Dublin Traffic Cams</string>
 	<string name="about_text">
 	V1.0.0\n

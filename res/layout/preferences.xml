@@ -7,13 +7,10 @@
 			android:id="@+id/textView1"
 			android:text="@string/fetchNumberText"
 			android:layout_height="wrap_content" />
-		<SeekBar
-			android:id="@+id/fetchSeek"
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			android:max="9" />
+		<SeekBar android:max="9" android:layout_height="wrap_content" android:id="@+id/fetchSeek" android:layout_width="match_parent" android:layout_marginRight="10dip"></SeekBar>
 		<TextView 
 			android:layout_width="wrap_content"
 			android:id="@+id/fetchCurrent"
 			android:layout_height="wrap_content" />
+		<CheckBox android:layout_height="wrap_content" android:id="@+id/singleFileBox" android:text="@string/downloadchoice" android:layout_width="match_parent"></CheckBox>
     </LinearLayout>

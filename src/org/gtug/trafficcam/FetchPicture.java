@@ -4,6 +4,7 @@
 package org.gtug.trafficcam;
 
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,4 +64,20 @@ public class FetchPicture {
 		}
 		return recievedPic;
 	}
+	URL makeURL(String cam, int choice)
+	{
+		URL im = null;
+		try
+		{
+			im = new URL(base_address + cam + "/" + choice);
+		} 
+		catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return im;
+	}
 }
+
+

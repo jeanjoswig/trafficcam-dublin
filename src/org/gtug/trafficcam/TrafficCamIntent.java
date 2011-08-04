@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.format.Time;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -37,6 +38,7 @@ import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -45,26 +47,35 @@ public class TrafficCamIntent extends Activity
 {
 	public static final String PREFS_NAME = "MyPrefsFile";
 	private ArrayList<Drawable> pics = new ArrayList<Drawable>();
+	final Context c = getBaseContext();
 	private int fetchNumber = 1;
 	private int spinnerPos;
-	private Gallery g; 
+	private Gallery g;
+	private TextView tV;
+	private int visiCount = 0;
+	private Boolean singleFile;
+	private SynchronisedCounter syncCount = new SynchronisedCounter();
+	private final SynchronisedPics syncPics = new SynchronisedPics();
 
     /** Called when the activity is first created. **/
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 		{
-		// Request progress bar
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.main);
-		this.drawInterface();
-		super.onCreate(savedInstanceState);
+			// Request progress bar
+			requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+			setProgressBarIndeterminateVisibility(true);
+			setContentView(R.layout.main);
+			this.drawInterface();
+			super.onCreate(savedInstanceState);
+			g = (Gallery) findViewById(R.id.gallery);
 		}
 	@Override
 	protected void onResume()
 		{
+			g = (Gallery) findViewById(R.id.gallery);
 			clearInternalFiles();
 			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-			if (fetchNumber != settings.getInt("fetchNumber", 2))
+			if(fetchNumber != settings.getInt("fetchNumber", 2)||singleFile !=settings.getBoolean("singleFile", false))
 			{	
 				this.drawInterface();
 			}
@@ -73,78 +84,192 @@ public class TrafficCamIntent extends Activity
 	
 	protected void drawInterface()
 		{
-		// Request progress spinner
-		setProgressBarIndeterminateVisibility(true);
-		//Define Camera Name Spinner
-		Spinner s = (Spinner)findViewById(R.id.Spinner01);
-		//Restore last selection
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		spinnerPos = settings.getInt("spinnerPos", 0);
-
-		/** Can't figure out why this isn't working, it should. Might not work with xml defined spinners. **/
-		//Set listener for Spinner
-		MyOnItemSelectedListener l = new MyOnItemSelectedListener();
-		s.setOnItemSelectedListener(l);
-	    
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-		s.setAdapter(adapter);
-		s.setSelection(spinnerPos);
-		s.invalidate();
+			// Request progress spinner
+			
+			//Define Camera Name Spinner
+			Spinner s = (Spinner)findViewById(R.id.Spinner01);
+			//Restore last selection
+			SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+			spinnerPos = settings.getInt("spinnerPos", 0);
+	
+			//Set listener for Spinner
+			MyOnItemSelectedListener l = new MyOnItemSelectedListener();
+			s.setOnItemSelectedListener(l);
+		    
+			ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.cameras_array, android.R.layout.simple_spinner_item);
+			adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+			s.setAdapter(adapter);
+			s.setSelection(spinnerPos);
+			s.invalidate();
 		}
+	/*private class FetchSinglePicture extends AsyncTask<URL, Integer, Drawable>
+	{
+		protected void onPreExecute()
+		{
+			setProgressBarIndeterminateVisibility(true);
+		}
+		protected Drawable doInBackground(URL... cam)
+		{
+			//
+			InputStream is = null;
+			try
+			{
+				is = (InputStream)cam[0].getContent();
+			}
+			catch (IOException e)
+			{
+				android.util.Log.e("Problem", "Exception fetching data", e);
+				e.printStackTrace();
+			}
+			return Drawable.createFromStream(is, cam[0].toString());
+		}
+		
+		protected void onProgressUpdate(Integer... progress)
+		{
+			TextView DownloadProgress;
+			DownloadProgress = (TextView)findViewById(R.id.DownloadProgress);		
+			DownloadProgress.setText(progress[0] + "%");
+			
+		}
+		protected void onPostExecute(Drawable pictureDraw)
+		{
+			pics.add(pictureDraw);
+			g.setAdapter(new ImageAdapter(c, pics));
+			int right = g.getCount() -1;
+	        g.setSelection(right);
+	        registerForContextMenu(g);
+	        setProgressBarIndeterminateVisibility(false);
+			
+		}
+	}*/
 	
 	public class MyOnItemSelectedListener implements OnItemSelectedListener
 		{
 		public void onItemSelected(AdapterView<?> parent, View view, final int pos, long id)
+		{
+		setProgressBarIndeterminateVisibility(true);
+		final SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		final Context c = getBaseContext();
+		final Resources res = getResources();
+		
+		//Save Spinner Position to Shared Preferences
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt("spinnerPos", pos);
+		editor.commit();
+		fetchNumber = settings.getInt("fetchNumber", 2);
+		g = (Gallery) findViewById(R.id.gallery);
+		singleFile = settings.getBoolean("singleFile", true);
+		if (singleFile == true)
+		{
+		pics.clear();
+	
+		tV = (TextView) findViewById(R.id.DownloadProgress);
+		visiCount =0;
+		editor.putInt("visiCount", visiCount);
+		editor.commit();
+		tV.setText(visiCount+"/"+fetchNumber);
+		tV.setVisibility(0);
+		syncCount.setTo(fetchNumber);
+		syncPics.restore();
+			for (int a = fetchNumber; a > 0; a--)
 			{
-
-			setProgressBarIndeterminateVisibility(true);
-			
-			new Thread(new Runnable() 
-			{
-			    public void run() 
-			    {
-			    final Context c = getBaseContext();
-				Resources res = getResources();
-				SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-				//Save Spinner Position to Shared Preferences
-				SharedPreferences.Editor editor = settings.edit();
-			    editor.putInt("spinnerPos", pos);
-			    editor.commit();
-			      
-				String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
-				final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
-				// Restore number of pictures to fetch preference
-				fetchNumber = settings.getInt("fetchNumber", 2);
-				pics = (new FetchPicture()).fetch_pics(selectedCamera, fetchNumber); /*use FetchPicture to get the image for that camera*/
-				// Reference the Gallery view
-		        g = (Gallery) findViewById(R.id.gallery);
-		        // Set the adapter to our custom adapter (below)
-		        g.post(new Runnable()
-		        {
-		        	public void run()
-		        	{
-		        	g.setAdapter(new ImageAdapter(c, pics));
-			        //Set the view to show the most recent picture, which is farthest to the right.
-		        	int right = g.getCount() -1;
-			        g.setSelection(right);
-			        // We also want to show context menu for longpressed items in the gallery
-			        setProgressBarIndeterminateVisibility(false);
-			        registerForContextMenu(g);
-				    }
-			});
-			    }
+				final int b = a; 
+				
+				
+				new Thread(new Runnable()
+				{
+					public void run()
+					{
+						int syncCountValue;
+						while(true)
+						{
+							 syncCountValue = syncCount.value();
+							if (syncCountValue == b)
+							{ break; }
+						}
+						
+						//setProgressBarIndeterminateVisibility(true);
+						String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
+						final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
+						Drawable newDraw=(new FetchPicture()).fetch_pic(selectedCamera, syncCountValue);
+						syncPics.add(newDraw);
+						
+						
+						// Set the adapter to our custom adapter (below)
+						
+						g.post(new Runnable()
+					{
+					public void run()
+					{
+						visiCount = (fetchNumber-b)+1;
+						tV.setText(visiCount+"/"+ fetchNumber);
+						g.setAdapter(new ImageAdapter(c, syncPics.output()));
+						//g.setAdapter(new ImageAdapter(c, pics));
+						int right = g.getCount() -1;
+						g.setSelection(right);
+						// We also want to show context menu for longpressed items in the gallery
+						if (visiCount == fetchNumber)
+						{
+						setProgressBarIndeterminateVisibility(false);
+						}
+						registerForContextMenu(g);
+						syncCount.decrement();
+					}
+					});
+					}
 			}
 			).start();
-			
 			}
+
+		}
+		else
+		{
+		tV = (TextView) findViewById(R.id.DownloadProgress);
+		tV.setVisibility(0);
+		new Thread(new Runnable()
+		{
+		public void run()
+		{
+			String[] camera_filenames = res.getStringArray(R.array.camera_filenames); /*load filenames from R*/
+			final String selectedCamera = camera_filenames[pos]; /*set filename to the camera selected in the spinner*/
+			// Restore number of pictures to fetch preference
+			//fetchNumber = settings.getInt("fetchNumber", 2);
+			pics = (new FetchPicture()).fetch_pics(selectedCamera, fetchNumber); /*use FetchPicture to get the image for that camera*/
+			// Reference the Gallery view
+			//g = (Gallery) findViewById(R.id.gallery);
+			// Set the adapter to our custom adapter (below)
+			g.post(new Runnable()
+		{
+		public void run()
+		{
+			setProgressBarIndeterminateVisibility(false);
+			g.setAdapter(new ImageAdapter(c, pics));
+			//Set the view to show the most recent picture, which is farthest to the right.
+			int right = g.getCount() -1;
+			g.setSelection(right);
+			// We also want to show context menu for longpressed items in the gallery
+			registerForContextMenu(g);
+			
+		}
+		});
+		}
+		}
+		).start();
+		
+		}
+		
+		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0)
-			{
-			// The spinner defaults to its first item so this code can't be reached.
-			}
+		{
+			// TODO Auto-generated method stub
+			
 		}
+		}
+		
+	
+	
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo)
     {
@@ -162,24 +287,9 @@ public class TrafficCamIntent extends Activity
 		String cameraName = cameras_array[spinnerPos];
 		Uri cachedPicUri;
 		
-		//AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		/*int context1 = R.string.context_menu_1;*/
         switch (item.getItemId()) 
         {
         case R.id.view:
-        	//This picture Toast will be taken out later.
-        	/*
-        	LayoutInflater inflater = getLayoutInflater();
-        	View layout = inflater.inflate(R.layout.imagetoast,
-        	                               (ViewGroup) findViewById(R.id.toast_layout_root));
-        	ImageView image = (ImageView) layout.findViewById(R.id.toastImage);
-        	image.setImageDrawable(myDrawable);
-        	Toast toast = new Toast(getApplicationContext());
-        	toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        	toast.setDuration(Toast.LENGTH_LONG);
-        	toast.setView(layout);
-        	toast.show();*/
-        	
         	if (ExternalStorageTest() == true)
         	{
 	        	cachedPicUri = getExternalDrawableUri(myDrawable); 
@@ -189,9 +299,7 @@ public class TrafficCamIntent extends Activity
         		cachedPicUri = getDrawableUri(myDrawable); 
 	        }
         	Intent viewPic = new Intent(android.content.Intent.ACTION_VIEW);
-        	//viewPic.setType("image/png");
         	viewPic.setDataAndType(cachedPicUri, "image/png");
-        	//viewPic.putExtra(Intent.EXTRA_STREAM, cachedPicUri);
         	startActivity(Intent.createChooser(viewPic, "View image in"));
             return true;
         case R.id.save:
@@ -301,11 +409,18 @@ public class TrafficCamIntent extends Activity
 		public View getView(int position, View convertView, ViewGroup parent) 
 		{
 			ImageView i = new ImageView(mContext);
-
+			DisplayMetrics metrics = new DisplayMetrics();
+			getWindowManager().getDefaultDisplay().getMetrics(metrics);
+			double space = 0.99;
+			double widthDiff =  (space*metrics.widthPixels)/pics.get(0).getMinimumWidth();
+			
 			i.setImageDrawable(pics.get(position));
-			i.setScaleType(ImageView.ScaleType.FIT_XY);
-			i.setLayoutParams(new Gallery.LayoutParams((int)Math.rint(1.75*pics.get(0).getMinimumWidth()),(int)Math.rint(1.75*pics.get(0).getMinimumHeight())));
-        
+			i.setScaleType(ImageView.ScaleType.FIT_CENTER);
+			i.setLayoutParams(new Gallery.LayoutParams((int) Math.rint(widthDiff*pics.get(0).getMinimumWidth()),(int)Math.rint(widthDiff*pics.get(0).getMinimumHeight())));
+			
+			
+
+			 
 			// The preferred Gallery item background
 			i.setBackgroundResource(mGalleryItemBackground);
         
