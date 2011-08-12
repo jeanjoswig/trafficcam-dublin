@@ -211,6 +211,7 @@ public class TrafficCamIntent extends Activity
 						if (visiCount == fetchNumber)
 						{
 						setProgressBarIndeterminateVisibility(false);
+						pics = syncPics.output();
 						}
 						registerForContextMenu(g);
 						syncCount.decrement();
