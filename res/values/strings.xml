@@ -30,165 +30,261 @@
 	</string>
 	<string name="fetchNumberText">Number of images to display</string>
 	<string-array name="cameras_array">
-		<item>Dame Street from Civic Offices</item>
-		<item>John\'s Road-SCR</item>
-		<item>John\'s Road West</item>
-		<item>Pearse Street</item>
-		<item>Samuel Beckett Bridge</item>
-		<item>Sir John Rogersons Quay</item>
-		<item>Harolds Cross Bridge</item>
-		<item>Longmile Road</item>
-		<item>N11-Fosters</item>
-		<item>N11-Mount Merrion</item>
-		<item>N11-Trees Road</item>
-		<item>N11-Kilmacud Rd</item>
-		<item>N11-Newtownpark Avenue</item>
-		<item>N11-Kill Lane</item>
-		<item>N11-Clonkeen</item>
-		<item>N11-Johnstown</item>
-		<item>N11-Wyattville</item>
-		<item>Cabra Road</item>
-		<item>The Quays from Liberty Hall</item>
-		<item>North Quays from Civic Offices</item>
-		<item>O\'Connell Bridge</item>
-		<item>North Wall Quay</item>
-		<item>Dublin Port Tunnel Toll Plaza</item>
-		<item>Guild Street-Mayor Street</item>
-		<item>Guild Street-Seville Place</item>
-		<item>Drumcondra Road</item>
-		<item>North Strand Road</item>
-		<item>Constitution Hill</item>
-		<item>M1-Balbriggan</item>
-		<item>M50-Ballinteer</item>
-		<item>M50-Edmondstown</item>
-		<item>M50-Firhouse</item>
-		<item>M50-Tallaght</item>
-		<item>M50-Greenhills Park</item>
-		<item>M50-Ballymount</item>
-		<item>M50-Red Cow</item>
-		<item>M50-Red Cow Slip</item>
-		<item>Naas road-Newlands cross</item>
-		<item>M50-Lucan</item>
-		<item>M50-Blanchardstown Roundabout</item>
-		<item>M50-South of Finglas Roundabout</item>
-		<item>M50-Ballymun</item>
-		<item>M1-Port Tunnel Works</item>
-		<item>M1-M50</item>
-		<item>N32-Malahide Road</item>
-		<item>M1-Airport</item>
-		<item>M1-Drynam</item>
-		<item>M1-Malahide Estuary</item>
-		<item>M1-Lissenhall</item>	
+		<item>Nangor Rd/Bawneouge Jtn</item>
 		<item>Belgard Airton</item>
 		<item>Belgard Cookstown</item>
 		<item>Belgard Mayberry</item>
 		<item>Belgard Sq East</item>
-		<item>Castle Road / ORR</item>
-		<item>Fonthill / Ronanstown</item>
+		<item>Castle Road/ORR</item>
+		<item>Nangor Rd/Deansrath Jtn</item>
+		<item>Fonthill/Ronanstown</item>
 		<item>Greenhills Airton</item>
 		<item>Greenhills Mayberry</item>
 		<item>Greenhills Tallaght</item>
 		<item>Greenhills Tymon</item>
 		<item>Jobstown</item>
+		<item>Nangor Road/Killeen</item>
+		<item>Fonthill/Liffey Valley</item>
 		<item>Lucan Rd at Woodvale</item>
-		<item>N7 / City West Junction</item>
-		<item>N7 Longmile</item>
+		<item>M50 Red Cow</item>
 		<item>N4 Newcastle</item>
-		<item>N7 / Rathcoole</item>
-		<item>N81 / Belgard Rd</item>
-		<item>N81 / Citwest</item>
+		<item>N7 City West Junction</item>
+		<item>N7 Longmile</item>
+		<item>N81 Belgard Rd</item>
+		<item>N81 Citwest</item>
+		<item>N81 Greenhills</item>
 		<item>N81 Oldbawn</item>
 		<item>N81 Whitestown</item>
-		<item>Nangor Rd / Bawneouge Jtn</item>
-		<item>Nangor Rd / Deansrath Jtn</item>
-		<item>Nangor Road / Killeen</item>
-		<item>Nangor / Park West Junction</item>
-		<item>Nangor Rd / Yellowmeadows Junction</item>
-		<item>M50–Red Cow</item>
 		<item>ORR Fettercairn</item>
 		<item>ORR at Foxhunter</item>
 		<item>ORR Grange Castle</item>
 		<item>ORR Nangor</item>
+		<item>Nangor Park West Junction</item>
+		<item>N7 Rathcoole</item>
+		<item>Tallaght Luas</item>
+		<item>Nangor Rd Yellowmeadows Junction</item>
+		<item>The Quays from Liberty Hall</item>
+		<item>N11 Fosters</item>
+		<item>N11 Mont Merrion</item>
+		<item>N11 Kilmacud Rd</item>
+		<item>N11 Trees Road</item>
+		<item>N11 Newtownpark Avenue</item>
+		<item>N11 Kill Lane</item>
+		<item>N11 Clonkeen</item>
+		<item>N11 Johnstown</item>
+		<item>N11 Wyattville</item>
+		<item>M1 Balbriggan</item>
+		<item>M1 Airport</item>
+		<item>M1 Drynam</item>
+		<item>M1 Malahide Estuary</item>
+		<item>M1 Lissenhall</item>
+		<item>North Wall Quay</item>
+		<item>Guild Street-Mayor Street</item>
+		<item>Constitution Hill</item>
+		<item>Dublin Port Tunnel Toll Plaza</item>
+		<item>Samuel Beckett Bridge</item>
+		<item>Sir John Rogersons Quay</item>
+		<item>Guild Street-Seville Place</item>
+		<item>John's Road-SCR</item>
+		<item>John's Road West</item>
+		<item>Dame Street from Civic Offices</item>
+		<item>North Quays from Civic Offices</item>
+		<item>Pearse Street</item>
+		<item>North Strand Road</item>
+		<item>Drumcondra Road</item>
+		<item>Harolds Cross Bridge</item>
+		<item>Cabra Road</item>
+		<item>O'Connell Bridge</item>
+		<item>Longmile Road</item>
+		<item>M50 Blanchardstown Roundabout</item>
+		<item>M50 Ballinteer</item>
+		<item>M50 Edmondstown</item>
+		<item>M50 Firhouse</item>
+		<item>M50 Tallaght</item>
+		<item>M50 Ballymount</item>
+		<item>M50 Red Cow</item>
+		<item>M50 Red Cow Slip</item>
+		<item>M50 Greenhills Park</item>
+		<item>M50 Lucan</item>
+		<item>Naas road Newlands cross</item>
+		<item>M50 South of Finglas Roundabout</item>
+		<item>N32 Malahide Road</item>
+		<item>M1 M50</item>
+		<item>M1 Port Tunnel Works</item>
+		<item>M50 Ballymun</item>
+		<item>N22 Macroom</item>
+		<item>N25 Middleton</item>
+		<item>N22 Ballyvourney</item>
+		<item>N22 Killarney</item>
+		<item>N25 Dungarvan</item>
+		<item>N72 Fermoy</item>
+		<item>M8 Mitchelstown</item>
+		<item>N20 Charleville</item>
+		<item>N25 Wexford</item>
+		<item>N13 Abbeyfeale</item>
+		<item>N24 Clonmel</item>
+		<item>N11 Enniscorthy</item>
+		<item>N21 Rathkeale Bypass</item>
+		<item>N24 Pallas Green</item>
+		<item>N10 Kilkenny</item>
+		<item>N18 Limerick Tunnel South</item>
+		<item>N8 Two Mile Borris</item>
+		<item>N11 Arklow Bypass</item>
+		<item>Clonmacken link Rd</item>
+		<item>M7 Portlaoise Bypass</item>
+		<item>N81 Baltinglass</item>
+		<item>M7 Newbridge Bypass</item>
+		<item>M6 Glennascaul</item>
+		<item>M6 West Ballinasloe</item>
+		<item>N11 Bray Bypass</item>
+		<item>N81 Tallaght</item>
+		<item>M50 Blanch</item>
+		<item>M50 Dublin Airport</item>
+		<item>N59 Connemara</item>
+		<item>N17 Tuam</item>
+		<item>M3 Kilcarn</item>
+		<item>N4 Ballinalack</item>
+		<item>M1 Drogheda Bypass</item>
+		<item>N4 Longford Bypass</item>
+		<item>N3 Cavan</item>
+		<item>N61 Elphin</item>
+		<item>N2 Reaghstown</item>
+		<item>N3 Butlers Bridge</item>
+		<item>N59 Ballina</item>
+		<item>N4 Collooney Bypass</item>
+		<item>N2 Emyvale</item>
+		<item>N15 Bundoran</item>
+		<item>N15 Killygordon</item>
+		<item>N13 Grianan of Aileach</item>
+		<item>N56 Gweedore</item>
 	</string-array>
 	<string-array name="camera_filenames">
-		<item>Site0Camera21</item>
-		<item>Site0Camera15</item>
-		<item>Site0Camera163</item>
-		<item>Site0Camera23</item>
-		<item>Site0Camera136</item>
-		<item>Site0Camera137</item>
-		<item>Site0Camera31</item>
-		<item>Site0Camera66</item>
-		<item>Site0Camera100</item>
-		<item>Site0Camera101</item>
-		<item>Site0Camera103</item>
-		<item>Site0Camera102</item>
-		<item>Site0Camera104</item>
-		<item>Site0Camera105</item>
-		<item>Site0Camera106</item>
-		<item>Site0Camera107</item>
-		<item>Site0Camera108</item>
-		<item>Site0Camera32</item>
-		<item>Site0Camera10</item>
-		<item>Site0Camera22</item>
-		<item>Site0Camera6</item>
-		<item>Site0Camera122</item>
-		<item>Site0Camera135</item>
-		<item>Site0Camera127</item>
-		<item>Site0Camera139</item>
-		<item>Site0Camera27</item>
-		<item>Site0Camera24</item>
-		<item>Site0Camera131</item>
-		<item>Site0Camera109</item>
-		<item>Site0Camera73</item>
-		<item>Site0Camera74</item>
-		<item>Site0Camera75</item>
-		<item>Site0Camera77</item>
-		<item>Site0Camera81</item>
-		<item>Site0Camera78</item>
-		<item>Site0Camera79</item>
-		<item>Site0Camera80</item>
-		<item>Site0Camera85</item>
-		<item>Site0Camera82</item>
-		<item>Site0Camera71</item>
-		<item>Site0Camera87</item>
-		<item>Site0Camera96</item>
-		<item>Site0Camera95</item>
-		<item>Site0Camera94</item>
-		<item>Site0Camera91</item>
-		<item>Site0Camera110</item>
-		<item>Site0Camera111</item>
-		<item>Site0Camera112</item>
-		<item>Site0Camera113</item>
+		<item>Bawneouge</item>
 		<item>BelgardAirton</item>
 		<item>belgardcook</item>
 		<item>belgardmayberry</item>
 		<item>BelgardSqE</item>
 		<item>Castleroad</item>
+		<item>Deansrath</item>
 		<item>FonthillRon</item>
 		<item>Greenhillsairton</item>
 		<item>Greenhillsmayberry</item>
 		<item>Greenhillstallaght</item>
 		<item>Greenhillstymon</item>
 		<item>Jobstown</item>
+		<item>killen</item>
+		<item>liffeyvalley</item>
 		<item>Lucanwood</item>
+		<item>m50redcow</item>
+		<item>N4newcastle</item>
 		<item>N7citywest</item>
 		<item>N7Longmile</item>
-		<item>N4newcastle</item>
-		<item>Rathcoole</item>
 		<item>N81belgard</item>
 		<item>N81Citywest</item>
+		<item>N81Greenhills</item>
 		<item>N81oldbawn</item>
 		<item>N81white</item>
-		<item>Bawneouge</item>
-		<item>Deansrath</item>
-		<item>killen</item>
-		<item>Parkwest</item>
-		<item>Yellowmeadows</item>
-		<item>m50redcow</item>
 		<item>ORRFetter</item>
 		<item>ORRFox</item>
 		<item>ORRGrange</item>
 		<item>ORRnangor</item>
+		<item>Parkwest</item>
+		<item>Rathcoole</item>
+		<item>Tallaghtluas</item>
+		<item>Yellowmeadows</item>
+		<item>Site0Camera10</item>
+		<item>Site0Camera100</item>
+		<item>Site0Camera101</item>
+		<item>Site0Camera102</item>
+		<item>Site0Camera103</item>
+		<item>Site0Camera104</item>
+		<item>Site0Camera105</item>
+		<item>Site0Camera106</item>
+		<item>Site0Camera107</item>
+		<item>Site0Camera108</item>
+		<item>Site0Camera109</item>
+		<item>Site0Camera110</item>
+		<item>Site0Camera111</item>
+		<item>Site0Camera112</item>
+		<item>Site0Camera113</item>
+		<item>Site0Camera122</item>
+		<item>Site0Camera127</item>
+		<item>Site0Camera131</item>
+		<item>Site0Camera135</item>
+		<item>Site0Camera136</item>
+		<item>Site0Camera137</item>
+		<item>Site0Camera139</item>
+		<item>Site0Camera15</item>
+		<item>Site0Camera163</item>
+		<item>Site0Camera21</item>
+		<item>Site0Camera22</item>
+		<item>Site0Camera23</item>
+		<item>Site0Camera24</item>
+		<item>Site0Camera27</item>
+		<item>Site0Camera31</item>
+		<item>Site0Camera32</item>
+		<item>Site0Camera6</item>
+		<item>Site0Camera66</item>
+		<item>Site0Camera71</item>
+		<item>Site0Camera73</item>
+		<item>Site0Camera74</item>
+		<item>Site0Camera75</item>
+		<item>Site0Camera77</item>
+		<item>Site0Camera78</item>
+		<item>Site0Camera79</item>
+		<item>Site0Camera80</item>
+		<item>Site0Camera81</item>
+		<item>Site0Camera82</item>
+		<item>Site0Camera85</item>
+		<item>Site0Camera87</item>
+		<item>Site0Camera91</item>
+		<item>Site0Camera94</item>
+		<item>Site0Camera95</item>
+		<item>Site0Camera96</item>
+		<item>0317578d_ff79c3da_cam1</item>
+		<item>0318063f_ff81cd24_cam1</item>
+		<item>0318cbbb_008c3c9c_cam1</item>
+		<item>0319b3ef_ff70fdc2_cam1</item>
+		<item>031a9034_ff8b6a14_cam1</item>
+		<item>031bafbf_ff7f7dc8_cam1</item>
+		<item>031da1cb_0076676a_cam1</item>
+		<item>031dcd32_ff7b9443_cam1</item>
+		<item>031df66e_ff9d70e1_cam1</item>
+		<item>031f0045_ff71b74e_cam1</item>
+		<item>031f015b_ff8a178a_cam1</item>
+		<item>032169ad_ff9bde52_cam1</item>
+		<item>032184cd_ff7844d2_cam1</item>
+		<item>032237d7_ff809c3d_cam1</item>
+		<item>0322e573_ff916633_cam1</item>
+		<item>03237e72_ff7877d2_cam1</item>
+		<item>0323b008_00603651_cam1</item>
+		<item>0325648e_ffa1c3a7_cam1</item>
+		<item>0326f2c7_ff79d30b_cam1</item>
+		<item>0328eb55_ff90e0bc_cam1</item>
+		<item>0328fb9c_ff9aad6a_cam1</item>
+		<item>032b5e81_0066edd4_cam1</item>
+		<item>032b7660_007297f0_cam1</item>
+		<item>032b9d70_0077a100_cam1</item>
+		<item>032bfe02_ffa285e1_cam1</item>
+		<item>032cda47_ff9dd289_cam1</item>
+		<item>032e6995_ff9ec02a_cam1</item>
+		<item>032ef7ba_00580d52_cam1</item>
+		<item>032faac4_ff6e72b7_cam1</item>
+		<item>03318948_ff78fe5e_cam1</item>
+		<item>03322130_ff9a2a1f_cam1</item>
+		<item>03323d67_0071e1a5_cam1</item>
+		<item>0333b817_ff9e62da_cam1</item>
+		<item>03340866_ff892c14_cam1</item>
+		<item>0335f618_ff936cdc_cam1</item>
+		<item>0336124e_007dde39_cam1</item>
+		<item>0336e5ef_006570f8_cam1</item>
+		<item>0338bde6_ff8f5906_cam1</item>
+		<item>0339afed_ff722711_cam1</item>
+		<item>033a1070_ff7f1030_cam1</item>
+		<item>033d50b0_006a3f70_cam1</item>
+		<item>033f1414_ff80de6d_cam1</item>
+		<item>034425d2_ff8b1572_cam1</item>
+		<item>0347de83_ff8eefc6_cam1</item>
+		<item>0347e95c_ff832632_cam1</item>
 	</string-array>
 </resources>
