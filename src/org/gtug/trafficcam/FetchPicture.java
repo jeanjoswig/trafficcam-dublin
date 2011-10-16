@@ -19,8 +19,7 @@ import android.graphics.drawable.Drawable;
 
 public class FetchPicture {	
 	private ArrayList<Drawable> pics = new ArrayList<Drawable>();		
-/*	private String base_address = "http://trafficcam-fetcher.savina.net/serve_single_pic/";	*/
-	private String base_address = "http://trafficcam-fetcher.savina.net/serve_single_pic_GTUG_100/";
+	private String base_address = "http://www.traffic-cameras.info/serve.php?cam=";
 
 	FetchPicture() {
 		super();
@@ -39,7 +38,7 @@ public class FetchPicture {
 		try 
 		{
 			for (int i=0; i < num; i++) {
-				URL im = new URL(base_address + cam + "/" + i);
+				URL im = new URL(base_address + cam + "&nb=" + i);
 				InputStream is = (InputStream)im.getContent();
 				pics.add(Drawable.createFromStream(is, cam));
 			}
